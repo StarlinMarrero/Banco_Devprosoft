@@ -1,4 +1,5 @@
 ﻿using Banco_Devprosoft.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,6 +22,7 @@ namespace Banco_Devprosoft.Controllers
         public IActionResult Index()
         {
             return View();
+
         }
 
         public IActionResult Privacy()
