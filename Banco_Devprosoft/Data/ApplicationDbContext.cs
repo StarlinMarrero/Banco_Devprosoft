@@ -14,6 +14,12 @@ namespace Banco_Devprosoft.Data
         {
         }
 
-        DbSet<Cuenta_Bancaria> Cuentas_Bancarias { get; set; }
+        public DbSet<Cuenta_Bancaria> Cuentas_Bancarias { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<Solicitud_Prestamo> Solicitudes_Prestamos { get; set; }
+        public DbSet<Solicitud_Cuenta> Solicitudes_Cuentas { get; set; }
+        public DbSet<Transferencia> Transferencias { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
+
     }
 }

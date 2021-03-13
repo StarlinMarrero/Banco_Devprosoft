@@ -11,6 +11,7 @@ namespace Banco_Devprosoft.Models
     {
         [Key]
         public int Cuenta_ID  { get; set; }
+        public string Tipo_Cuenta { get; set; } //Ahorro, Credito, Prestamo, etc
         public DateTime Fecha_Creacion { get; set; }
         public int Balance { get; set; }
         public bool Cerrada { get; set; }
@@ -19,8 +20,14 @@ namespace Banco_Devprosoft.Models
 
         [ForeignKey("Propietario_ID")]
         public ApplicationUser Get_Propietario { get; set; }
+    }
+
+    public class Solicitud_Cuenta : Solicitud
+    {
+        public string Tipo_De_Cuenta { get; set; }
 
     }
+
 
 
 }
