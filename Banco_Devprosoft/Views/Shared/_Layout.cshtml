@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Banco_Devprosoft</title>
+    <link href="~/lib/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -32,6 +33,8 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
+
             @RenderBody()
         </main>
     </div>
@@ -44,6 +47,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome-free-5.15.2-web/js/all.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

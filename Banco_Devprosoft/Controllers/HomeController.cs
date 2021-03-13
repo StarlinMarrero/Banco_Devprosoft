@@ -31,6 +31,19 @@ namespace Banco_Devprosoft.Controllers
 
         }
 
+        public IActionResult Contacto()
+        {
+
+            return View();
+        }
+
+        public JsonResult Suma()
+        {
+
+            var suma = 1 + 2;
+
+            return Json(suma);
+        }
         public IActionResult Privacy()
         {
             return View();

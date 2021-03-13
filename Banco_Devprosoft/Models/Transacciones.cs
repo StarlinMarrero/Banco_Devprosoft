@@ -18,8 +18,7 @@ namespace Banco_Devprosoft.Models
 
         [ForeignKey("Cuenta_Origen_ID")]
         public Cuenta_Bancaria Get_Cuenta_Origen { get; set; }
-        [ForeignKey("Cuenta_Destino_ID")]
-        public Cuenta_Bancaria Get_Cuenta_Destino { get; set; }
+
     }
 
     public class Pago
