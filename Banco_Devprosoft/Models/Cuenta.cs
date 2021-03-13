@@ -15,6 +15,9 @@ namespace Banco_Devprosoft.Models
         public DateTime Fecha_Creacion { get; set; }
         public int Balance { get; set; }
         public bool Cerrada { get; set; }
+        public int Monto_Maximo { get; set; }
+        public DateTime Fecha_De_Corte { get; set; }
+        public DateTime Fecha_Limite { get; set; }
         public DateTime? Fecha_Cierre { get; set; }
         public string Propietario_ID { get; set; }
 

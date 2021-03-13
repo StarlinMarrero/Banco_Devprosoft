@@ -23,7 +23,7 @@ namespace Banco_Devprosoft.Models
         public int Monto_Mensual { get; set; } //*****FALTA CONSTANTE DE MORA*******//
         public int Cuotas { get; set; }
         public int Tasa_de_Interes { get; set; }
-        //public List<Pagos> Lista_Pagos { get; set; }
+        public List<Pago> Lista_Pagos { get; set; }
 
     }
 

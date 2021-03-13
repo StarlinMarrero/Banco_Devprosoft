@@ -23,6 +23,7 @@ namespace Banco_Devprosoft.Controllers
         {
             return View();
 
+
         }
 
         public IActionResult Privacy()

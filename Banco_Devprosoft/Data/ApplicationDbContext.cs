@@ -20,6 +20,8 @@ namespace Banco_Devprosoft.Data
         public DbSet<Solicitud_Cuenta> Solicitudes_Cuentas { get; set; }
         public DbSet<Transferencia> Transferencias { get; set; }
         public DbSet<Pago> Pagos { get; set; }
+        public DbSet<Tarjeta> Tarjetas { get; set; }
+
 
     }
 }

@@ -26,14 +26,20 @@ namespace Banco_Devprosoft.Models
     {
         [Key]
         public int Pago_ID { get; set; }
-        public string Tipo_De_Pago { get; set; }
+        public string Servicio_Pagado { get; set; }
         public int Cuenta_Origen_ID { get; set; }
         public int Monto_Parcial { get; set; }
         public int Mora { get; set; }
         public int Monto_Total { get; set; }
         public DateTime Fecha_Pago { get; set; }
-        public int Producto_ID { get; set; }
-        
+        public int Servicio_ID { get; set; }
+        [ForeignKey("Servicio_ID")]
+        public Prestamo Get_Prestamo { get; set; }
+
+        [ForeignKey("Servicio_ID")]
+        public Tarjeta Get_Tarjeta { get; set; }
+
+
     }
 
 
