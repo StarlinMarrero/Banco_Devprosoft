@@ -10,7 +10,7 @@ namespace Banco_Devprosoft.Models
     public class Tarjeta
     {
         [Key]
-        public int Tarjeta_ID { get; set; }  // 5
+        public int Tarjeta_ID { get; set; }
         public string Numero_Tarjeta { get; set; }
         public DateTime Vencimiento { get; set; }
         public DateTime Fecha_Emision { get; set; }
@@ -21,4 +21,11 @@ namespace Banco_Devprosoft.Models
         public Cuenta_Bancaria Get_Bancaria { get; set; }
         public List<Pago> Lista_Pagos { get; set; }
     }
+
+    public class Solicitud_Tarjeta : Solicitud
+    {
+        public int Monto_Solicitado { get; set; }
+    }
+
+
 }
