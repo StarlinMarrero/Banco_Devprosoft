@@ -3,77 +3,78 @@
     ViewData["Title"] = "Index";
 }
 
-<h3><i class="fas fa-coins text-warning"></i> Solicitar un prestamo</h3>
 
-<div class="row">
 
-    <div class="col-6">
+<div class="container" style="margin-top: 5rem !important;">
+    <h3><i class="fas fa-coins text-warning"></i> Solicitar un prestamo</h3>
+    <div class="row">
 
-        <form id="formulario">
-            <div class="row">
-                <div class="col-6">
-                    <label>Nombres</label>
-                    <input type="text" name="Nombres" class="form-control" placeholder="Ingrese sus nombres" required />
-                </div>
-                <div class="col-6">
-                    <label>Apellidos</label>
-                    <input type="text" name="Apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required />
-                </div>
-                <div class="col-6">
-                    <label>Cédula</label>
-                    <input type="number" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
-                </div>
-                <div class="col-6">
-                    <label>Correo</label>
-                    <input type="email" name="Correo" class="form-control" placeholder="Ingrese su Correo" required />
-                </div>
-                <div class="col-6">
-                    <label>Contacto #1</label>
-                    <input type="number" name="Contacto_1" class="form-control" placeholder="Ingrese su contacto #1" required />
-                </div>
-                <div class="col-6">
-                    <label>Contacto #2</label>
-                    <input type="number" name="Contacto_2" class="form-control" placeholder="Ingrese su contacto #2" />
-                </div>
-                <div class="col-12">
-                    <label>Dirección</label>
-                    <input type="text" name="Direccion" class="form-control" placeholder="Ingrese la direccion" required />
-                </div>
-                <div class="col-6">
-                    <label>Empresa</label>
-                    <input type="text" name="Empresa" class="form-control" placeholder="Nombre de la empresa" required />
-                </div>
-                <div class="col-6">
-                    <label>Salario</label>
-                    <input type="number" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
-                </div>
-                <div class="col-6">
-                    <label>Ocupación</label>
-                    <input type="text" name="Ocupacion" class="form-control" placeholder="Ingrese Su Ocupación" required />
-                </div>
-                <div class="col-12 mt-3">
-                    <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Solicitar</button>
-                </div>
-            </div>
-        </form>
+        <div class="col-6">
 
-    </div>
-    
-    <div class="col-6">
-        <h3 class="text-center text-primary">
-           
+            <form id="formulario">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Nombres</label>
+                        <input type="text" name="Nombres" class="form-control" placeholder="Ingrese sus nombres" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Apellidos</label>
+                        <input type="text" name="Apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Cédula</label>
+                        <input type="number" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Correo</label>
+                        <input type="email" name="Correo" class="form-control" placeholder="Ingrese su Correo" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Contacto #1</label>
+                        <input type="number" name="Contacto_1" class="form-control" placeholder="Ingrese su contacto #1" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Contacto #2</label>
+                        <input type="number" name="Contacto_2" class="form-control" placeholder="Ingrese su contacto #2" />
+                    </div>
+                    <div class="col-12">
+                        <label>Dirección</label>
+                        <input type="text" name="Direccion" class="form-control" placeholder="Ingrese la direccion" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Empresa</label>
+                        <input type="text" name="Empresa" class="form-control" placeholder="Nombre de la empresa" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Salario</label>
+                        <input type="number" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
+                    </div>
+                    <div class="col-6">
+                        <label>Ocupación</label>
+                        <input type="text" name="Ocupacion" class="form-control" placeholder="Ingrese Su Ocupación" required />
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Solicitar</button>
+                    </div>
+                </div>
+            </form>
 
-            
-        </h3>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h3>
-                    PRÉSTAMOS PERSONALES
-                    
-                </h3>
-                <p class="lead">
-                    <strong>TE ACOMPAÑAMOS A DESARROLLAR NUEVOS PROYECTOS</strong>
-                Cuando nos necesites, ahí estaremos. Por eso te acompañamos para que puedas resolver tus compromisos de estudio o trabajo.</p>
+        </div>
+
+        <div class="col-6">
+            <h3 class="text-center text-primary">
+            </h3>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h3>
+                        PRÉSTAMOS PERSONALES
+
+                    </h3>
+                    <p class="lead">
+                        <strong>TE ACOMPAÑAMOS A DESARROLLAR NUEVOS PROYECTOS</strong>
+                        Cuando nos necesites, ahí estaremos. Por eso te acompañamos para que puedas resolver tus compromisos de estudio o trabajo.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -99,7 +100,7 @@
                     icon: result.icon
                 })
 
-
+                $("#formulario")[0].reset();
             });
 
 
