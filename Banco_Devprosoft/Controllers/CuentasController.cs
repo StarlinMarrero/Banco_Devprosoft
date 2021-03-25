@@ -38,9 +38,24 @@ namespace Banco_Devprosoft.Controllers
 
             }
 
+            var Solicitud = new Solicitud_Cuenta
+            {
+                Nombres = model.Nombres,
+                Apellidos = model.Apellidos,
+                Salario = model.Salario,
+                Cedula = model.Cedula,
+                Contacto_1 = model.Contacto_1,
+                Contacto_2 = model.Contacto_2,
+                Correo = model.Correo,
+                Empleado = model.Empleado,
+                Tipo_De_Cuenta = model.Tipo_De_Cuenta,
+                Empresa = model.Empresa,
+                Fecha_Solicitud = DateTime.Now,
+                Ocupacion = model.Ocupacion,
+            };
 
-
-
+            db.Solicitudes_Cuentas.Add(Solicitud);
+            db.SaveChanges();
 
             return Json(new { title = "Solicitud de Cuentas", text = "Su Solicitud ha sido enviada", icon = "success"});
         }

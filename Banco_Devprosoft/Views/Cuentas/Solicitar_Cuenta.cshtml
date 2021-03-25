@@ -3,64 +3,122 @@
     ViewData["Title"] = "Solicitar_Cuenta";
 }
 
+<style>
+
+    .container_Botones{
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+
 <div class="container" style="margin-top: 5rem !important;">
 
-    <div class="col-6">
-        <h1>Solicitar Cuenta</h1>
-        <form id="Formulario_Solicitud_Cuenta">
-            <div class="row">
+    <div class="row">
+        <div id="Form_Nuevo_Usuario" class="col-6" style="display:none;">
+            <h1><i class="fas fa-wallet text-success"></i> Solicitar Cuenta</h1>
 
-                <div class="col-6">
-                    <label>Nombres:</label>
-                    <input class="form-control" name="Nombres" type="text" id="Nombres" placeholder="Ingrese su nombre." required>
-                </div>
-                <div class="col-6">
-                    <label>Apellidos:</label>
-                    <input class="form-control" name="Apellidos" type="text" id="Apellidos" placeholder="Ingrese su apellido.." required>
-                </div>
-                <div class="col-6">
-                    <label>Cedula:</label>
-                    <input class="form-control" name="Cedula" type="text" id="Cedula" placeholder="Digite su cedula." required>
-                </div>
-                <div class="col-6">
-                    <label>Contacto1:</label>
-                    <input class="form-control tel" name="Contacto1" type="text" id="Contacto#1" placeholder="Digite su contacto #1." required>
-                </div>
-                @*<div class="col-6">
-            <label>Contacto2:</label>
-            <input class="form-control tel" name="Contacto2" type="text" id="Contacto#2" placeholder="Digite su contacto #2." required>
-        </div>*@
-
-                <div class="col-6">
-                    <label>Empleado:</label> <br />
-                    <input class="Empleado_Radio" name="Empleado" type="radio" id="Empleado1" value="true" required> Si <br />
-                    <input class="Empleado_Radio" name="Empleado" type="radio" id="Empleado2" value="false" required> No <br />
-
-                </div>
-                <div class="col-6">
-                    <label>Correo:</label>
-                    <input class="form-control" name="Correo" type="email" id="Correo" placeholder="Correo electronico." required>
-                </div>
-                <div class="col-12" id="Campos_Empleado" style="display: none;">
-                    <div class="row">
-                        <div class="col-6">
-                            <label>Empresa:</label>
-                            <input class="form-control" name="Empresa" type="text" id="Empresa" placeholder="Ingrese empresa donde labora." required>
-                        </div>
-                        <div class="col-6">
-                            <label>Ocupación:</label>
-                            <input class="form-control" name="Ocupacion" type="text" id="Ocupacion" placeholder="¿Qué cargo desempeña?." required>
-                        </div>
-                        <div class="col-6">
-                            <label>Salario:</label>
-                            <input class="form-control" name="Salario" type="text" id="Salario" placeholder="Digite su salario." required>
-                        </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <span>Tipo de Cuenta: </span>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" id="Campo_Tipo" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Ahorro">Ahorro</option>
+                            <option value="Credito">Crédito</option>
+                        </select>
                     </div>
                 </div>
-
-                <div class="col-12 mt-3"><button class="btn btn-primary" id="Btn_Solicitar"><i class="fas fa-sign-in-alt"></i> Solicitar</button></div>
             </div>
-        </form>
+            <hr class="mb-3" />
+            <form id="Formulario_Solicitud_Cuenta">
+                <div class="row">
+
+                    <div class="col-6">
+                        <label>Nombres:</label>
+                        <input class="form-control" name="Nombres" type="text" id="Nombres" placeholder="Ingrese su nombre." required>
+                    </div>
+                    <div class="col-6">
+                        <label>Apellidos:</label>
+                        <input class="form-control" name="Apellidos" type="text" id="Apellidos" placeholder="Ingrese su apellido.." required>
+                    </div>
+                    <div class="col-6">
+                        <label>Cedula:</label>
+                        <input class="form-control" name="Cedula" type="text" id="Cedula" placeholder="Digite su cedula." required>
+                    </div>
+                    <div class="col-6">
+                        <label>Contacto1:</label>
+                        <input class="form-control tel" name="Contacto1" type="text" id="Contacto#1" placeholder="Digite su contacto #1." required>
+                    </div>
+                    @*<div class="col-6">
+                        <label>Contacto2:</label>
+                        <input class="form-control tel" name="Contacto2" type="text" id="Contacto#2" placeholder="Digite su contacto #2." required>
+                    </div>*@
+
+                    <div class="col-6">
+                        <label>Empleado:</label> <br />
+                        <input class="Empleado_Radio" name="Empleado" type="radio" id="Empleado1" value="true" required> Si <br />
+                        <input class="Empleado_Radio" name="Empleado" type="radio" id="Empleado2" value="false" required> No <br />
+
+                    </div>
+                    <div class="col-6">
+                        <label>Correo:</label>
+                        <input class="form-control" name="Correo" type="email" id="Correo" placeholder="Correo electronico." required>
+                    </div>
+                    <div class="col-12" id="Campos_Empleado" style="display: none;">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Empresa:</label>
+                                <input class="form-control" name="Empresa" type="text" id="Empresa" placeholder="Ingrese empresa donde labora." required>
+                            </div>
+                            <div class="col-6">
+                                <label>Ocupación:</label>
+                                <input class="form-control" name="Ocupacion" type="text" id="Ocupacion" placeholder="¿Qué cargo desempeña?." required>
+                            </div>
+                            <div class="col-6">
+                                <label>Salario:</label>
+                                <input class="form-control" name="Salario" type="text" id="Salario" placeholder="Digite su salario." required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3"><button class="btn btn-primary" id="Btn_Solicitar"><i class="fas fa-sign-in-alt"></i> Solicitar</button></div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-5 ml-4" id="jumbotron" style="display:none;">
+            <h3 class="text-center text-primary">
+            </h3>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h3>
+                        CUENTAS DE AHORRO
+
+                    </h3>
+                    <p class="lead">
+                        <strong>TE ACOMPAÑAMOS A DESARROLLAR NUEVOS PROYECTOS</strong>
+                        Cuando nos necesites, ahí estaremos. Por eso te acompañamos para que puedas resolver tus compromisos de estudio o trabajo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-success" id="Pregunta_New_Old">
+
+        <p class="h1 text-primary text-center">¿Ya tienes cuentas con nosotros?</p>
+
+        <div class="mt-4 container_Botones">
+            <button id="Registrado" class="btn btn-success mr-3">Si, tengo una cuenta</button>
+            <button onclick="Mostrar_Ocultar_Form('Nuevo')" id="NewUser" class="btn btn-primary">No, soy nuevo</button>
+        </div>
+
+
+
     </div>
 </div>
 
@@ -72,6 +130,7 @@
         $(document).ready(function () { //Codigo a ejecutar cuando la página termine de cargar
 
             //Declaración de Mascaras
+
             $(".tel").mask('(000) 000-0000');
             $("#Cedula").mask('000-0000000-0');
             $("#Salario").mask('000,000,000', { reverse: true })
@@ -84,11 +143,11 @@
 
             if (valor == "true") {
 
-                $("#Campos_Empleado").show();
+                $("#Campos_Empleado").show("fade");
 
             } else {
 
-                $("#Campos_Empleado").hide();
+                $("#Campos_Empleado").hide("fade");
             }
 
 
@@ -97,6 +156,10 @@
 
 
         $("#Formulario_Solicitud_Cuenta").submit(function(){
+
+            var valor_Salario = $("#Salario").val().replace(/,/g, "");
+
+            $("#Salario").val(valor_Salario);
 
             var data_cuentas_solicitadas = $("#Formulario_Solicitud_Cuenta").serialize();
 
@@ -132,6 +195,17 @@
 
         }
 
+
+        function Mostrar_Ocultar_Form(opcion) {
+
+            if (opcion == "Nuevo") {
+                $("#Pregunta_New_Old").hide();
+                $("#jumbotron").show();
+                $("#Form_Nuevo_Usuario").show("fade");
+
+            }
+
+        }
     </script>
 
 }
