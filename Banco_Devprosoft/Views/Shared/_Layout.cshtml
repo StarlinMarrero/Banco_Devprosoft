@@ -31,11 +31,12 @@
             </div>
         </nav>
     </header>
-    <div class="">
+    <div>
         <main role="main" class="pb-3">
 
-
-            @RenderBody()
+            <div>
+                @RenderBody()
+            </div>
         </main>
     </div>
 
@@ -49,6 +50,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/fontawesome-free-5.15.2-web/js/all.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -31,6 +31,17 @@ namespace Banco_Devprosoft.Controllers
         public JsonResult add_Solicitud_Cuentas(Solicitud_Cuenta model)
         {
             var validacion = db.Solicitudes_Cuentas.Where(p => p.Cedula == model.Cedula).FirstOrDefault();
+
+            if(validacion != null)
+            {
+                return Json(new { title = "Solicitud de Cuentas", text = "Usted ya tiene una solicitud pendiente. Puede visitar nuestras oficinas para consultar su estado.", icon = "info" });
+
+            }
+
+
+
+
+
             return Json(new { title = "Solicitud de Cuentas", text = "Su Solicitud ha sido enviada", icon = "success"});
         }
 
