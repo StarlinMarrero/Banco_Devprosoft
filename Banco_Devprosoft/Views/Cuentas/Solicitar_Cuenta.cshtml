@@ -33,7 +33,7 @@
                 </div>
             </div>
             <hr class="mb-3" />
-            <form id="Formulario_Solicitud_Cuenta">
+            <form id="Formulario_Solicitud_Cuenta" hidden>
                 <div class="row">
 
                     <div class="col-6">
@@ -87,6 +87,24 @@
                     <div class="col-12 mt-3"><button class="btn btn-primary" id="Btn_Solicitar"><i class="fas fa-sign-in-alt"></i> Solicitar</button></div>
                 </div>
             </form>
+
+            <form id="Form_User_Registrado" hidden>
+
+                <div class="row">
+                    <div class="col-6">
+                        <label>Cedula:</label>
+                        <input class="form-control" name="Cedula" type="text" id="Cedula" placeholder="Digite su cedula." required>
+                    </div>
+
+                    <div class="col-6 mt-3">
+                        <div class="col-12 mt-3"><button class="btn btn-primary btn-block" id="Btn_Solicitar2"><i class="fas fa-sign-in-alt"></i> Solicitar</button></div>
+
+                    </div>
+
+                </div>
+                
+
+            </form>
         </div>
 
 
@@ -113,7 +131,7 @@
         <p class="h1 text-primary text-center">¿Ya tienes cuentas con nosotros?</p>
 
         <div class="mt-4 container_Botones">
-            <button id="Registrado" class="btn btn-success mr-3">Si, tengo una cuenta</button>
+            <button onclick="Mostrar_Ocultar_Form('Viejo')" id="Registrado" class="btn btn-success mr-3">Si, tengo una cuenta</button>
             <button onclick="Mostrar_Ocultar_Form('Nuevo')" id="NewUser" class="btn btn-primary">No, soy nuevo</button>
         </div>
 
@@ -201,8 +219,15 @@
             if (opcion == "Nuevo") {
                 $("#Pregunta_New_Old").hide();
                 $("#jumbotron").show();
+
+                $("#Formulario_Solicitud_Cuenta").removeAttr("hidden");
                 $("#Form_Nuevo_Usuario").show("fade");
 
+            } else {
+                $("#Pregunta_New_Old").hide();
+                $("#jumbotron").show();
+                $("#Form_User_Registrado").removeAttr("hidden");
+                $("#Form_Nuevo_Usuario").show("fade");
             }
 
         }
