@@ -60,6 +60,42 @@ namespace Banco_Devprosoft.Controllers
             return Json(new { title = "Solicitud de Cuentas", text = "Su Solicitud ha sido enviada", icon = "success"});
         }
 
+        public JsonResult Crear_Cuenta_OldUser(string Tipo_Cuenta, string Cedula_recibida)
+        {
+
+            var user = db.Users.Where(x => x.Cedula == Cedula_recibida).FirstOrDefault();
+
+
+            if (user == null)
+            {
+                return Json(new { title = "Solicitud de Cuentas", text = "Usuario no encontrado, favor verificar cédula.", icon = "error" });
+
+            }
+
+
+        
+            var Solicitud = new Solicitud_Cuenta
+            {
+                Nombres = user.Nombres,
+                Apellidos = user.Apellidos,
+                Salario = user.Sueldo,
+                Cedula = user.Cedula,
+                Contacto_1 = user.Contacto_1,
+                Contacto_2 = user.Contacto_2,
+                Correo = user.Email,
+                Empleado = user.Trabaja,
+                Tipo_De_Cuenta = Tipo_Cuenta,
+                Empresa = user.Empresa,
+                Fecha_Solicitud = DateTime.Now,
+                Ocupacion = user.Ocupacion
+            };
+
+            db.Solicitudes_Cuentas.Add(Solicitud);
+            db.SaveChanges();
+
+
+            return Json(new { title = "Solicitud de Cuentas", text = "Su Solicitud ha sido enviada", icon = "success" });
+        }
 
     }
 }

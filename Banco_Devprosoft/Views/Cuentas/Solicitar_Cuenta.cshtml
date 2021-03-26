@@ -15,7 +15,7 @@
 <div class="container" style="margin-top: 5rem !important;">
 
     <div class="row">
-        <div id="Form_Nuevo_Usuario" class="col-6" style="display:none;">
+        <div id="Formulario_Solicitud_Cuenta" class="col-6" style="display:none;">
             <h1><i class="fas fa-wallet text-success"></i> Solicitar Cuenta</h1>
 
             <div class="col-12">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <hr class="mb-3" />
-            <form id="Formulario_Solicitud_Cuenta" hidden>
+            <form id="Form_Nuevo_Usuario" hidden>
                 <div class="row">
 
                     <div class="col-6">
@@ -71,15 +71,15 @@
                         <div class="row">
                             <div class="col-6">
                                 <label>Empresa:</label>
-                                <input class="form-control" name="Empresa" type="text" id="Empresa" placeholder="Ingrese empresa donde labora." required>
+                                <input class="form-control" name="Empresa" type="text" id="Empresa" placeholder="Ingrese empresa donde labora." required disabled>
                             </div>
                             <div class="col-6">
                                 <label>Ocupación:</label>
-                                <input class="form-control" name="Ocupacion" type="text" id="Ocupacion" placeholder="¿Qué cargo desempeña?." required>
+                                <input class="form-control" name="Ocupacion" type="text" id="Ocupacion" placeholder="¿Qué cargo desempeña?." required disabled>
                             </div>
                             <div class="col-6">
                                 <label>Salario:</label>
-                                <input class="form-control" name="Salario" type="text" id="Salario" placeholder="Digite su salario." required>
+                                <input class="form-control" name="Salario" type="text" id="Salario" placeholder="Digite su salario." required disabled>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,14 @@
             $(".tel").mask('(000) 000-0000');
             $("#Cedula").mask('000-0000000-0');
             $("#Salario").mask('000,000,000', { reverse: true })
+
+
+            //$(".Empleado_Radio").setCustomValidity("Debes seleccionar una opción");
         });
+
+
+        
+
 
 
         $(".Empleado_Radio").change(function () {
@@ -162,10 +169,18 @@
             if (valor == "true") {
 
                 $("#Campos_Empleado").show("fade");
+                $("#Empresa").removeAttr("disabled");
+                $("#Ocupacion").removeAttr("disabled");
+                $("#Salario").removeAttr("disabled");
+
 
             } else {
 
                 $("#Campos_Empleado").hide("fade");
+                $("#Empresa").attr("disabled", true);
+                $("#Ocupacion").attr("disabled", true);
+                $("#Salario").attr("disabled", true);
+
             }
 
 
@@ -173,13 +188,13 @@
         })
 
 
-        $("#Formulario_Solicitud_Cuenta").submit(function(){
+        $("#Form_Nuevo_Usuario").submit(function () {
 
-            var valor_Salario = $("#Salario").val().replace(/,/g, "");
+            //var valor_Salario = $("#Salario").val().replace(/,/g, "");
 
-            $("#Salario").val(valor_Salario);
+            //$("#Salario").val(valor_Salario);
 
-            var data_cuentas_solicitadas = $("#Formulario_Solicitud_Cuenta").serialize();
+            var data_cuentas_solicitadas = $("#Form_Nuevo_Usuario").serialize();
 
             console.log(data_cuentas_solicitadas)
 
@@ -191,12 +206,32 @@
                     icon: resultado.icon
                 });
 
+                $("#Form_Nuevo_Usuario")[0].reset();
+
             });
+
+            
 
             return false;
         });
 
+        $("#Form_User_Registrado").submit(function () {
 
+            var data = { Tipo_Cuenta: $("#Campo_Tipo").val(), Cedula: $("#Cedula").val() }
+
+            $.post('/Cuentas/Crear_Cuenta_OldUser', data).done(function (result) {
+
+                Swal.fire({
+                    title: result.title,
+                    text: result.text,
+                    icon: result.icon
+                })
+
+            });
+
+            return false;
+        });
+       
         //Ajax de Práctica
 
         function Ejecutar_Peticion() {
@@ -213,21 +248,22 @@
 
         }
 
-
         function Mostrar_Ocultar_Form(opcion) {
 
             if (opcion == "Nuevo") {
+
                 $("#Pregunta_New_Old").hide();
                 $("#jumbotron").show();
 
-                $("#Formulario_Solicitud_Cuenta").removeAttr("hidden");
-                $("#Form_Nuevo_Usuario").show("fade");
+                $("#Form_Nuevo_Usuario").removeAttr("hidden");
+                $("#Formulario_Solicitud_Cuenta").show("fade");
 
+                
             } else {
                 $("#Pregunta_New_Old").hide();
                 $("#jumbotron").show();
                 $("#Form_User_Registrado").removeAttr("hidden");
-                $("#Form_Nuevo_Usuario").show("fade");
+                $("#Formulario_Solicitud_Cuenta").show("fade");
             }
 
         }

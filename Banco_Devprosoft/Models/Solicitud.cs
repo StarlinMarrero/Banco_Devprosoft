@@ -19,7 +19,7 @@ namespace Banco_Devprosoft.Models
         public string Correo { get; set; }
         public bool Empleado { get; set; }
         public string Empresa { get; set; }
-        public int Salario { get; set; }
+        public int? Salario { get; set; }
         public string Ocupacion { get; set; }
         public DateTime Fecha_Cierre { get; set; }
         public DateTime Fecha_Solicitud { get; set; }
