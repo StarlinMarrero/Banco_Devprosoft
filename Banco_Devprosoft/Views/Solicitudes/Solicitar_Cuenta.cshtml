@@ -198,7 +198,7 @@
 
             console.log(data_cuentas_solicitadas)
 
-            $.post("/Cuentas/add_Solicitud_Cuentas", data_cuentas_solicitadas).done(function (resultado) {
+            $.post("/Solicitudes/add_Solicitud_Cuentas", data_cuentas_solicitadas).done(function (resultado) {
 
                 Swal.fire({
                     title: resultado.title,
@@ -219,7 +219,7 @@
 
             var data = { Tipo_Cuenta: $("#Campo_Tipo").val(), Cedula: $("#Cedula").val() }
 
-            $.post('/Cuentas/Crear_Cuenta_OldUser', data).done(function (result) {
+            $.post('/Solicitudes/Crear_Cuenta_OldUser', data).done(function (result) {
 
                 Swal.fire({
                     title: result.title,

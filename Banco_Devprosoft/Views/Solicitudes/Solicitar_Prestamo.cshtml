@@ -92,7 +92,7 @@
 
             var data = $("#formulario").serialize();
 
-            $.post("/Prestamos/Crear_Solicitud", data).done(function (result) {
+            $.post("/Solicitudes/Crear_Solicitud", data).done(function (result) {
 
                 Swal.fire({
                     title: result.title,
