@@ -71,8 +71,6 @@ namespace Banco_Devprosoft.Controllers
                 return Json(new { title = "Solicitud de Cuentas", text = "Usuario no encontrado, favor verificar cédula.", icon = "error" });
 
             }
-
-
         
             var Solicitud = new Solicitud_Cuenta
             {
@@ -89,6 +87,8 @@ namespace Banco_Devprosoft.Controllers
                 Fecha_Solicitud = DateTime.Now,
                 Ocupacion = user.Ocupacion
             };
+
+
 
             db.Solicitudes_Cuentas.Add(Solicitud);
             db.SaveChanges();
