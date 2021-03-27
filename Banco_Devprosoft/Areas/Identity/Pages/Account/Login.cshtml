@@ -5,49 +5,73 @@
     ViewData["Title"] = "Log in";
 }
 
+<style>
+
+    /*Estilos LOGIN*/
+
+    .Container_Login {
+        transition: 500ms;
+    }
+
+        .Container_Login:hover {
+            box-shadow: #28a74594 0px 0px 18px 0px;
+        }
+
+        .Container_Login:active {
+            box-shadow: #28a74594 0px 0px 18px 0px;
+        }
+
+    .contenedor{
+        display: flex;
+        width: 100%;
+  
+    }
+</style>
 <h1>@ViewData["Title"]</h1>
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-4 m-auto">
-            <section>
-                <form id="account" method="post">
-                    <h4 class="text-center"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión.</h4>
-                    <hr />
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Input.UserName"></label>
-                        <input asp-for="Input.UserName" class="form-control" />
-                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Input.Password"></label>
-                        <input asp-for="Input.Password" class="form-control" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="Input.RememberMe">
-                                <input asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
-                            </label>
+
+                <section class="Container_Login">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="account" method="post">
+                                <h4 class="text-center"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión.</h4>
+                                <hr />
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label class="text-center"><i class="fas fa-user"></i> Usuario</label>
+                                    <input asp-for="Input.UserName" class="form-control" />
+                                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label text-center><i class="fas fa-key"></i> Contraseña</label>
+                                    <input asp-for="Input.Password" class="form-control" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label class="text-center">
+                                            Recordar mi usuario
+                                            <input asp-for="Input.RememberMe" />
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-block">Iniciar sesion</button>
+                                </div>
+                                <div class="form-group">
+                                    <p class="text-center">
+                                        <a id="forgot-password" asp-page="./ForgotPassword">Recuperar accesos</a>
+                                    </p>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Log in</button>
-                    </div>
-                    <div class="form-group">
-                        <p>
-                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                        </p>
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                        </p>
-                        <p>
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                        </p>
-                    </div>
-                </form>
-            </section>
+
+                </section>
         </div>
       
     </div>

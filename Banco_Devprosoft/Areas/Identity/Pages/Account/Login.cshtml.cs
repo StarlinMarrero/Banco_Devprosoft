@@ -85,9 +85,9 @@ namespace Banco_Devprosoft.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
 
-
+                    
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect("/Banking");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -100,7 +100,7 @@ namespace Banco_Devprosoft.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Los datos suministrados son incorrectos.");
                     return Page();
                 }
             }
