@@ -1,0 +1,331 @@
+﻿
+@{
+    ViewData["Title"] = "Solicitudes Cuentas";
+}
+
+<h1 class="mb-4">Solicitudes de Cuentas</h1>
+
+
+<div class="row">
+
+
+    <div class="col-12">
+        <div class="card card-success card-outline">
+
+            <div class="card-header">
+
+                <h4 class="text-light text-center ml-2 col-lg">Pendientes</h4>
+
+
+            </div>
+            <div class="card-body">
+                <table id="Tabla_Solicitudes_Cuentas" class="table table-responsive-lg table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>Solicitud #</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Fecha</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                                <td>10265</td>
+                                <td>Yeison Daniel</td>
+                                <td>Serrano Basora</td>
+                                <td>28/03/2021  5:56 PM</td>
+                                <td><button class="btn btn-success text-light"><i class="fas fa-search"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>10265</td>
+                                <td>Juana María</td>
+                                <td>Vargas Soriano</td>
+                                <td>28/03/2021  5:54 PM</td>
+                                <td><button class="btn btn-success text-light"><i class="fas fa-search"></i></button></td>
+                            </tr>*@
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" >
+    Launch demo modal
+</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="Detalles_Solicitud" tabindex="-1" aria-labelledby="Detalles_Solicitud_Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title" id="Detalles_Solicitud_Label">Solicitud #0810. Fecha 28/03/2021  6:45 PM</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-user text-secondary"></i> Nombres:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="nombresp" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-user text-secondary"></i> Apellidos:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="apellidosp" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-id-card text-secondary"></i> Cédula:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="cedulap" class="text-right "></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-globe-americas text-secondary"></i> Dirección:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="direccionp" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-phone-alt text-secondary"></i> Contacto #1:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="contacto1p" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-phone-alt text-secondary"></i> Contacto #2:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="contacto2p" class="text-right">No tiene</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-envelope text-secondary"></i> Correo:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="correop" class="text-right text-wrap"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-briefcase text-secondary"></i> Empleado:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="empleadop" class="text-right">Sí</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-building text-secondary"></i> Empresa:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="empresap" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-user-tie text-secondary"></i> Ocupación:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="ocupacionp" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-coins text-secondary"></i> Salario:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="salariop" class="text-right"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger ">Rechazar</button>
+                <button type="button" class="btn btn-success text-light">Aprobar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $("li").removeClass("active");
+            $("#li_Solicitudes").addClass("active");
+
+
+            $("#Tabla_Solicitudes_Cuentas").DataTable();
+
+            Obtener_Solicitudes()
+
+        });
+
+        var Solicitudes_List = [];
+        var solicitud_Abierta;
+
+        function Obtener_Solicitudes() {
+
+            $.get("/Banking/Solicitudes/Get_Solicitudes_Cuentas").done(function (result) {
+
+                console.log(result)
+                if (result.length > 0) {
+
+                    Solicitudes_List = result;
+
+                    $("#Tabla_Solicitudes_Cuentas").dataTable({
+                        language: {
+                            "lengthMenu": "Mostrar _MENU_ Registros",
+                            "zeroRecords": "No se encontraron resultados",
+                            "info": "_TOTAL_ Solicitudes en total.",
+                            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                            "sSearch": "<i class='fas fa-search'></i> Buscar:",
+                            "oPaginate": {
+                                "sFirst": "Primero",
+                                "sLast": "Último",
+                                "sNext": "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "sProcessing": "Procesando...",
+                        },
+                        "destroy": "true",
+                        "bLengthChange": false,
+                        "bInfo": true,
+                        "searching": true,
+                        data: result,
+                        columns: [
+                            {
+                                "data": "solicitud_ID"
+                            },
+                            {
+                                "data": "nombres"
+                            },
+                            {
+                                "data": "apellidos"
+                            },
+                            {
+                                "data": "fecha_Solicitud", render: function (fecha) {
+                                    return moment(fecha).format('L');
+                                }
+                            },
+                            {
+                                "data": "solicitud_ID", render: function (id) {
+                                    var btn = `<a class="btn btn-success btn-sm text-light" data-toggle="modal" data-target="#Detalles_Solicitud" onclick="Detalles_Solicitud(${id})"><i class="fas fa-search"></i> Ver Detalles</a>`;
+                                    return btn
+                                }
+                            }
+                        ],
+                        responsive: "true",
+                    });
+                }
+
+
+            })
+
+            $(".paginate_button.active > a").addClass("bg-success");
+            $(".paginate_button.active > a").addClass("text-light");
+            $(".paginate_button.active").removeClass("active");
+
+        }
+
+
+
+        function Detalles_Solicitud(Solicitud_ID) {
+
+            var solicitud = Solicitudes_List.find(x => x.solicitud_ID == Solicitud_ID);
+
+            var trabaja = (solicitud.empleado) ? "Sí" : "No"; //Operador ternario
+
+            $("#nombresp").text(solicitud.nombres);
+            $("#apellidosp").text(solicitud.apellidos);
+            $("#cedulap").text(solicitud.cedula);
+            $("#direccionp").text(solicitud.direccion);
+            $("#contacto1p").text(solicitud.contacto1);
+            $("#contacto2p").text(solicitud.contacto2);
+            $("#correop").text(solicitud.correo);
+            $("#empleadop").text(trabaja);
+            $("#empresap").text(solicitud.empresa);
+            $("#ocupacionp").text(solicitud.ocupacion);
+            $("#salariop").text(solicitud.salario);
+
+            solicitud_Abierta = Solicitud_ID;
+
+        }
+
+
+        function Aprobar_Solicitud_Cuenta() {
+
+
+            var data = { Solicitud_ID: solicitud_Abierta };
+
+            $.post("/Banking/Solicitudes/Aprobar_Solicitud_Cuenta", data).done(function (result) {
+
+                Swal.fire({
+                    title: result.title,
+                    text: result.text,
+                    icon: result.icon
+                })
+
+            });
+
+
+        }
+
+    </script>
+}

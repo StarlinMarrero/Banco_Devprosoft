@@ -136,7 +136,7 @@
                     </ul>
                 </div>
             </header>
-            <aside class="sidebar fixed-top">
+            <aside class="sidebar">
                 <div class="sidebar-container">
                     <div class="sidebar-header">
                         <div class="brand">
@@ -151,7 +151,7 @@
                     </div>
                     <nav class="menu">
                         <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                            <li id="li_Inicio" class="active">
+                            <li id="li_Inicio">
                                 <a href="/Banking">
                                     <i class="fa fa-home"></i> Inicio
                                 </a>
@@ -189,6 +189,16 @@
                                     </a>
                                 </li>
                             }
+
+                            @if (User.IsInRole("Representante"))
+                            {
+                                <li id="li_Solicitudes">
+                                    <a href="/Banking/Solicitudes/Solicitudes_Pendientes">
+                                        <i class="fa fa-list-ul"></i> Solicitudes
+                                    </a>
+                                </li>
+                            }
+
 
                         </ul>
                     </nav>
@@ -330,7 +340,7 @@
     <script src="~/lib/fontawesome-free-5.15.2-web/js/all.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-
+    <script src="~/lib/moment-js/moment.js"></script>
 
 
     <script src="~/Banking/js/app.js"></script>
