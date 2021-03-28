@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Banco_Devprosoft.Areas.Banking.Controllers
 {
-    [Authorize]
-    [Area("Banking")]
-    public class TransferenciasController : Controller
+    [Authorize(Roles = "Representante")]
+    public class SolicitudesController : Controller
     {
-        public IActionResult Mis_Transferencias()
+        public IActionResult Solicitudes_Pendientes()
         {
             return View();
+        }
+
+        public JsonResult Get_Solicitudes()
+        {
+
+            return Json("");
         }
     }
 }

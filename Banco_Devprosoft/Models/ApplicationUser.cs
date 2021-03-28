@@ -11,6 +11,7 @@ namespace Banco_Devprosoft.Models
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Cedula { get; set; }
+        public string Telefono { get; set; }
         public string Direccion { get; set; }
         public DateTime Fecha_Creacion { get; set; }
         public DateTime Fecha_Nacimiento { get; set; }

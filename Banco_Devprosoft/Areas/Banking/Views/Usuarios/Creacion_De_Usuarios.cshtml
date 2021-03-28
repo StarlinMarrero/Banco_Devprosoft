@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "Creación de Usuarios";
+}
+
+<h1 class="mb-4">Creación de Usuarios</h1>
+
+<div class="container pl-0">
+
+    <div class="card card-success">
+
+
+        <div class="card-body">
+
+            <form id="Form_Crear_Usuarios">
+
+                <div class="row">
+                    <div class="col-lg-12 mb-3">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-12">
+                                <label>Tipo de Usuario:</label>
+                            </div>
+                            <div class="col-lg-3 col-sm-12 p-lg-0">
+                                <label for="Representante">Representante</label>
+                                <input type="radio" name="Tipo_Empleado" id="Representante" value="Representante"  oninvalid="this.setCustomValidity('Debes de seleccionar un tipo de usuario')" onclick="Limpiar_Validacion()" required/>
+                            </div>
+                            <div class="col-lg-3 col-sm-12 p-lg-0">
+                                <label for="Cajero">Cajero</label>
+                                <input type="radio" name="Tipo_Empleado" id="Cajero" onclick="Limpiar_Validacion()" value="Cajero" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Nombres</label>
+                        <input class="form-control" type="text" name="Nombres" value="" required/>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Apellidos</label>
+                        <input class="form-control" type="text" name="Apellidos" value="" required/>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Cédula</label>
+                        <input class="form-control" type="text" name="Cedula" id="Cedula" value="" required/>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Teléfono</label>
+                        <input class="form-control tel" type="text" name="Telefono" value="" required/>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Correo</label>
+                        <input class="form-control" type="email" name="Email" value="" required/>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <label>Dirección</label>
+                        <input class="form-control" type="text" name="Direccion" value="" required/>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 p-0">
+
+                        <div class="col-lg-6  col-sm-12">
+                            <button id="Loading_Crear" class="btn btn-block btn-success text-light" hidden disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Creando...
+                            </button>
+                            <button id="Btn_Crear" class="btn btn-block btn-success text-light">Crear</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".tel").mask('(000) 000-0000');
+            $("#Cedula").mask('000-0000000-0');
+
+
+            $("li").removeClass("active");
+            $("#li_Crear_Usuarios").addClass("active");
+
+        });
+
+        function Limpiar_Validacion() {
+            document.getElementById('Representante').setCustomValidity('');
+        }
+
+
+        $("#Form_Crear_Usuarios").submit(function () {
+            $("#Btn_Crear").attr("hidden", true);
+            $("#Loading_Crear").removeAttr("hidden");
+
+
+            var formData = $(this).serialize();
+            console.log(formData);
+
+            $.post("/Banking/Usuarios/Crear_Usuario", formData).done(function (result) {
+
+                
+                Swal.fire({
+                    title: result.title,
+                    text: result.text,
+                    icon: result.icon
+                })
+                $("#Loading_Crear").attr("hidden", true);
+                $("#Btn_Crear").removeAttr("hidden");
+
+            });
+
+
+            return false;
+        });
+
+
+    </script>
+}

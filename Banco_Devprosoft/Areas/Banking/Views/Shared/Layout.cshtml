@@ -37,7 +37,9 @@
     <link href="~/Banking/css/vendor.css" rel="stylesheet" />
 
     <link href="~/Banking/css/app.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/af-2.3.5/b-1.7.0/cr-1.5.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rr-1.2.7/sc-2.0.3/datatables.min.css" />
     <!-- Theme initialization -->
     <script async="" src="https://www.google-analytics.com/analytics.js"></script>
     @*@*<script>
@@ -134,7 +136,7 @@
                     </ul>
                 </div>
             </header>
-            <aside class="sidebar">
+            <aside class="sidebar fixed-top">
                 <div class="sidebar-container">
                     <div class="sidebar-header">
                         <div class="brand">
@@ -179,6 +181,15 @@
                                 </a>
                             </li>
 
+                            @if (User.IsInRole("Gerente"))
+                            {
+                                <li id="li_Crear_Usuarios">
+                                    <a href="/Banking/Usuarios/Creacion_De_Usuarios">
+                                        <i class="fa fa-user-plus"></i> Crear Usuarios
+                                    </a>
+                                </li>
+                            }
+
                         </ul>
                     </nav>
                 </div>
@@ -198,7 +209,7 @@
             <div class="mobile-menu-handle"></div>
             <article class="content dashboard-page">
 
-                @RenderBody();
+                @RenderBody()
             </article>
             <footer class="footer fixed-bottom">
                 <div class="footer-block buttons">
@@ -303,9 +314,12 @@
 
     <script>
 
-        $("#Cerrar_Sesion").click(function () {
+        $(document).ready(function () {
+            $("#Cerrar_Sesion").click(function () {
 
-            $("#Form_Cerrar_Sesion").submit();
+                $("#Form_Cerrar_Sesion").submit();
+
+            })
 
         })
 
@@ -317,11 +331,16 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
 
     <script src="~/Banking/js/app.js"></script>
     <script src="~/Banking/js/vendor.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.24/af-2.3.5/b-1.7.0/cr-1.5.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rr-1.2.7/sc-2.0.3/datatables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"><div class="responsive-bootstrap-toolkit"><div class="device-xs 				  hidden-sm-up"></div><div class="device-sm hidden-xs-down hidden-md-up"></div><div class="device-md hidden-sm-down hidden-lg-up"></div><div class="device-lg hidden-md-down hidden-xl-up"></div><div class="device-xl hidden-lg-down			  "></div></div><div class="jqvmap-label" style="display: none;"></div><div class="jqvmap-label" style="display: none;"></div>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
