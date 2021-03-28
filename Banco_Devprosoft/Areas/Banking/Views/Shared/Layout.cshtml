@@ -1,21 +1,328 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 
-<html>
+@*<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Layout</title>
+    </head>
+    <body>
+
+
+        <div class="container">
+
+
+        </div>
+
+
+
+
+
+    </body>
+    </html>*@
+
+<html class="no-js" lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Layout</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Internet Banking - Devprosoft Bank </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/vendor.css">
+
+    <link href="~/Banking/css/vendor.css" rel="stylesheet" />
+
+    <link href="~/Banking/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <!-- Theme initialization -->
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    @*@*<script>
+            var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+                {};
+            var themeName = themeSettings.themeName || '';
+            if (themeName) {
+                document.write('<link rel="stylesheet" id="theme-style" href="css/app-' + themeName + '.css">');
+            }
+            else {
+                document.write('<link rel="stylesheet" id="theme-style" href="css/app.css">');
+            }
+        </script>*@
+    @*<link rel="stylesheet" id="theme-style" href="css/app.css">*@
+    <style type="text/css">
+        .jqstooltip {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            visibility: hidden;
+            background: rgb(0, 0, 0) transparent;
+            background-color: rgba(0,0,0,0.6);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+            white-space: nowrap;
+            padding: 5px;
+            border: 1px solid white;
+            box-sizing: content-box;
+            z-index: 10000;
+        }
+
+        .jqsfield {
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+        }
+    </style>
 </head>
-<body>
+<body class="loaded">
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-block header-block-search">
+                    <form role="search">
+                        <div class="input-container">
+                            <i class="fa fa-search"></i>
+                            <input type="search" placeholder="Buscar">
+                            <div class="underline"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+
+                        <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="img avatar-img rounded-circle" style="background-image: url('data:image/png;base64,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'); ">
+
+                                </div>
+                                <span class="name"> Yeison Slim </span>
+                            </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
+                                <a class="dropdown-item" href="/Banking/Usuarios/Perfil">
+                                    <i class="fa fa-user icon"></i> Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-bell icon"></i> Notificaciones
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-tools icon"></i> Configuración
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <form id="Form_Cerrar_Sesion" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button class="dropdown-item m-1 mt-2" href="" id="Cerrar_Sesion">
+                                        <i class="fa fa-power-off icon"></i> Cerrar Sesión
 
 
-    <div class="container">
-        @RenderBody();
+                                    </button>
 
+                                </form>
+
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <aside class="sidebar">
+                <div class="sidebar-container">
+                    <div class="sidebar-header">
+                        <div class="brand">
+                            <div class="logo">
+                                <span class="l l1"></span>
+                                <span class="l l2"></span>
+                                <span class="l l3"></span>
+                                <span class="l l4"></span>
+                                <span class="l l5"></span>
+                            </div> Banco Devprosoft
+                        </div>
+                    </div>
+                    <nav class="menu">
+                        <ul class="sidebar-menu metismenu" id="sidebar-menu">
+                            <li id="li_Inicio" class="active">
+                                <a href="/Banking">
+                                    <i class="fa fa-home"></i> Inicio
+                                </a>
+                            </li>
+
+                            <li id="li_Perfil">
+                                <a href="/Banking/Usuarios/Perfil">
+                                    <i class="fa fa-user"></i> Perfil
+                                </a>
+                            </li>
+
+                            <li id="li_Transferencias">
+                                <a href="/Banking/Transferencias/Mis_Transferencias">
+                                    <i class="fa fa-exchange-alt"></i> Transferencias
+                                </a>
+                            </li>
+
+                            <li id="li_Prestamos">
+                                <a href="/Banking/Prestamos/Mis_Prestamos">
+                                    <i class="fa fa-hand-holding-usd"></i> Préstamos
+                                </a>
+                            </li>
+
+                            <li id="li_Pagos">
+                                <a href="/Banking/Pagos/Index">
+                                    <i class="fa fa-file-invoice-dollar"></i> Pagos
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <footer class="sidebar-footer">
+                    <ul class="sidebar-menu metismenu" id="customize-menu">
+                        <li>
+
+                            <a href="">
+                                <i class="fa fa-question-circle"></i> Ayuda
+                            </a>
+                        </li>
+                    </ul>
+                </footer>
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
+            <div class="mobile-menu-handle"></div>
+            <article class="content dashboard-page">
+
+                @RenderBody();
+            </article>
+            <footer class="footer fixed-bottom">
+                <div class="footer-block buttons">
+                    <div class="copyright ml-auto">
+                        Desarrollado por Grupo Devprosoft &copy; <a href="https://www.devprosoft.com.do" target="_blank"><img class="img-fluid" width="25" src="~/Logo_Devprosoft.png" /></a>
+                    </div>
+                </div>
+                <div class="footer-block author">
+                    Programación Orientada a Objetos - POO
+                </div>
+            </footer>
+            <div class="modal fade" id="modal-media">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Media Library</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-tab-container">
+                            <ul class="nav nav-tabs modal-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#gallery" data-toggle="tab" role="tab">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Upload</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content modal-tab-content">
+                                <div class="tab-pane fade" id="gallery" role="tabpanel">
+                                    <div class="images-container">
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                                    <div class="upload-container">
+                                        <div id="dropzone">
+                                            <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message-block">
+                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Insert Selected</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" id="confirm-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure want to do this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
     </div>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-80463319-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script>
+
+        $("#Cerrar_Sesion").click(function () {
+
+            $("#Form_Cerrar_Sesion").submit();
+
+        })
+
+    </script>
+    @*<script src="js/vendor.js"></script>
+        <script src="js/app.js"></script>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/fontawesome-free-5.15.2-web/js/all.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
+    <script src="~/Banking/js/app.js"></script>
+    <script src="~/Banking/js/vendor.js"></script>
 
-    @await RenderSectionAsync("Scripts1", required: false)
+    <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"><div class="responsive-bootstrap-toolkit"><div class="device-xs 				  hidden-sm-up"></div><div class="device-sm hidden-xs-down hidden-md-up"></div><div class="device-md hidden-sm-down hidden-lg-up"></div><div class="device-lg hidden-md-down hidden-xl-up"></div><div class="device-xl hidden-lg-down			  "></div></div><div class="jqvmap-label" style="display: none;"></div><div class="jqvmap-label" style="display: none;"></div>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
