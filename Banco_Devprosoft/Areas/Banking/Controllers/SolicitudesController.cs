@@ -103,6 +103,25 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                 var crear_User = userManager.CreateAsync(Usuario, password);
                 crear_User.Wait();
 
+                if (crear_User.Result.Succeeded == false)
+                {
+
+                    var info_error = crear_User.Result.Errors.FirstOrDefault();
+                        
+                    
+                    
+                    
+                    
+                    return Json(new { title = "Solicitud de Cuenta", text = info_error, icon = "error" });
+
+                
+
+
+                }
+
+
+             
+
                 var asignar_Rol = userManager.AddToRoleAsync(Usuario, "Cliente");
                 asignar_Rol.Wait();
 
@@ -113,8 +132,9 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                     Propietario_ID = Usuario.Id,
                     Balance = 2000,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now,
-                    Fecha_Limite = DateTime.Now
+                    Fecha_De_Corte = DateTime.Now.AddDays(30),
+                    Fecha_Limite = DateTime.Now,
+                    
 
 
                 };

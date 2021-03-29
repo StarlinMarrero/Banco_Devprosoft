@@ -320,6 +320,19 @@
 
             $.post("/Banking/Solicitudes/Aprobar_Solicitud_Cuenta", data).done(function (result) {
 
+                if (result.icon == "error") {
+
+                   
+                    Swal.fire({
+                        title: result.title + " " + result.text.code,
+                        text: result.text.description,
+                        icon: result.icon
+                    })
+
+
+                    return false;
+                }
+
                 Swal.fire({
                     title: result.title,
                     text: result.text,
