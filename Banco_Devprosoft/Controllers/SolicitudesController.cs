@@ -1,5 +1,6 @@
 ﻿using Banco_Devprosoft.Data;
 using Banco_Devprosoft.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Banco_Devprosoft.Controllers
 {
+    [AllowAnonymous]
     public class SolicitudesController : Controller
     {
 
