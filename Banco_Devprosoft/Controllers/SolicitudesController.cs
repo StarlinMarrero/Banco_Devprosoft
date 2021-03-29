@@ -67,7 +67,15 @@ namespace Banco_Devprosoft.Controllers
         {
 
             var user = db.Users.Where(x => x.Cedula == Cedula_recibida).FirstOrDefault();
+            var Get_Cuenta = db.Solicitudes_Cuentas
+                 .Where(x => x.Cerrada == false)
+                .Where(x => x.Cedula == Cedula_recibida).FirstOrDefault();
 
+            if (Get_Cuenta != null)
+            {
+                return Json(new { title = "Solicitud de Cuentas", text = "Usted ya tiene una solicitud pendiente, favor espere ser aprobada por el banco.", icon = "info" });
+
+            }
 
             if (user == null)
             {
