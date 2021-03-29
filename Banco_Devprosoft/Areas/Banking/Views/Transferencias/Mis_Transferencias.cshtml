@@ -24,17 +24,17 @@
 
 
     <h3 class="mb-4">Realizar Transferencia</h3>
-    <form>
+    <form id="Form_Transferencia">
         <div class="row">
 
             <div class="col-lg-4 col-sm-12">
                 <label for="Cuenta_ID">#Cuenta Destino</label>
-                <input id="Cuenta_ID" class="form-control" type="text" name="Cuenta_ID" placeholder="Introduzca el número de cuenta" />
+                <input id="Cuenta_ID" class="form-control" type="text" name="Cuenta_ID" placeholder="Introduzca el número de cuenta" required/>
             </div>
 
             <div class="col-lg-4 col-sm-12">
                 <label for="Monto">Monto</label>
-                <input id="Monto" class="form-control" type="text" name="Monto" placeholder="¿Qué cantidad desea transferir?" />
+                <input id="Monto" class="form-control" type="text" name="Monto" placeholder="¿Qué cantidad desea transferir?" required/>
 
             </div>
 
@@ -66,6 +66,58 @@
 
         });
 
+        //function Verificar_Transferencia() {
 
+        //    ////var data = { Cuenta_Destino: $("#"), Monto: }
+
+        //}
+
+
+        $("#Form_Transferencia").submit(function () {
+
+            var data = { Cuenta_Destino: $("#Cuenta_ID").val(), Monto: $("#Monto").val() }
+
+            $.get("/Banking/Transferencias/Verificar_Transferencia", data).done(function (result) {
+
+                if (result.title) {
+
+                    Swal.fire({
+                        title: result.title,
+                        text: result.text,
+                        icon: result.icon
+                    })
+
+                } else {
+                    Swal.fire({
+                        text: `¿Esta seguro/a que desea transferir RD$${data.Monto} a la cuenta #${data.Cuenta_Destino} de ${result.nombre_Completo}?`,
+                        icon: "info",
+                        title: `Transferencias`,
+                        showCancelButton: true,
+                        confirmButtonText: `Confirmar`,
+                        confirmButtonColor: '#28a745',
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+
+                            $.post("/Banking/Transferencias/Realizar_Transferencia", data).done(function (result) {
+
+                                Swal.fire({
+                                    title: result.title,
+                                    text: result.text,
+                                    icon: result.icon
+                                })
+
+                                $("#Form_Transferencia")[0].reset();
+
+                            });
+
+                        }
+                    })
+                }
+            
+            });
+
+            return false;
+        });
     </script>
 }
