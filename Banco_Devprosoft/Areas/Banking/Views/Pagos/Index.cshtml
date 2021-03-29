@@ -3,10 +3,33 @@
     ViewData["Title"] = "Pagos";
 }
 
-<h1>Pagos</h1>
+<h3>Pagos</h3>
 
 
+<div class="row">
+    <div class="col-lg-3 col-sm-12">
+        <label>Seleccione la cuenta a pagar</label>
+        <select class="form-control" id="Select_Cuenta">
+        </select>
+    </div>
+    <div class="col-lg-3 col-sm-12">
+        <label>Desde Mi Cuenta</label>
+        <select class="form-control" id="Select_Mis_Cuenta">
+        </select>
+    </div>
 
+    <div class="col-lg-3 col-sm-12">
+        <label>Monto A Pagar</label>
+        <input id="Monto" type="number" placeholder="Monto a pagar" class="form-control"/>
+    </div>
+
+    <div class="col-lg-3 col-sm-12">
+
+        <button class="btn btn-primary" style="margin-top: 32px;" onclick="Procesar_Pago();">Procesar Pago</button>
+
+    </div>
+
+</div>
 
 
 
@@ -22,9 +45,81 @@
 
             $("li").removeClass("active");
             $("#li_Pagos").addClass("active");
-
+            Obtener_Info_Cuentas_A_Pagar();
+            Obtener_Info_Cuentas_Desde_A_Pagar();
         });
 
+        function Obtener_Info_Cuentas_A_Pagar() {
+
+            $.get("/Banking/Cuentas/Obtener_Info_Cuentas_A_Pagar").done(function (result) {
+
+                $("#Select_Cuenta").empty();
+                $.each(result.cuenta, function (i, item) {
+
+                    var op = `<option value="${item.cuenta_ID}">${item.tipo_Cuenta} $${item.balance}</option>`;
+                    $("#Select_Cuenta").append(op);
+                })
+
+                console.log(result);
+
+
+            });
+
+        }
+
+        function Obtener_Info_Cuentas_Desde_A_Pagar() {
+
+            $.get("/Banking/Cuentas/Obtener_Info_Cuentas_Desde_A_Pagar").done(function (result) {
+
+                $("#Select_Mis_Cuenta").empty();
+                $.each(result.cuenta, function (i, item) {
+
+                    var op = `<option value="${item.cuenta_ID}">${item.tipo_Cuenta} $${item.balance}</option>`;
+                    $("#Select_Mis_Cuenta").append(op);
+                })
+
+                console.log(result);
+
+
+            });
+
+        }
+        function Procesar_Pago() {
+
+            $("#Select_Cuenta")
+            $("#Select_Mis_Cuenta")
+            var data = {
+                Cuenta_A_Pagar_Id: $("#Select_Cuenta").val(),
+                Cuenta_Debitar_Id: $("#Select_Mis_Cuenta").val(),
+                Monto: $("#Monto").val()
+
+            };
+            if ($("#Select_Mis_Cuenta").val() == null || $("#Select_Cuenta").val() == null) {
+
+                Swal.fire({
+                    title: "Seleccione una Cuenta",
+                    text: "Tienes que selecionar una de tus cuentas",
+                    icon: "info"
+                })
+
+                return false;
+
+            }
+
+            $.post("/Banking/Pagos/Procesar_Pago", data).done(function (result) {
+
+                Swal.fire({
+                    title: result.title,
+                    text: result.text,
+                    icon: result.icon
+                })
+
+                Obtener_Info_Cuentas_A_Pagar();
+                Obtener_Info_Cuentas();
+            })
+
+
+        }
 
     </script>
 }

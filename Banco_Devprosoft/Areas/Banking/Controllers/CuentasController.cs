@@ -29,18 +29,68 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var cuenta = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).FirstOrDefault();
+            var cuenta = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId)
+                  .Where(x => x.Cerrada == false)
+                .ToList();
 
-            if(cuenta != null){
-
-                return Json(new { cuenta = cuenta });
-
-            }
-            else
+            foreach (var item in cuenta)
             {
-                return Json("No tiene Cuenta");
-
+                if (item.Balance <= 0)
+                {
+                    item.Cerrada = true;
+                    db.SaveChanges();
+                }
             }
+
+           return Json(new { cuenta = cuenta });
+
+           
+          
+
+        } 
+        
+        public JsonResult Obtener_Info_Cuentas_A_Pagar()
+        {
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var cuenta = db.Cuentas_Bancarias
+                .Where(x => x.Tipo_Cuenta == "Prestamo" || x.Tipo_Cuenta == "Credito" ||
+                x.Tipo_Cuenta == "Crédito"
+                ).Where(x => x.Propietario_ID == UserId)
+                .Where(x => x.Cerrada == false)
+                .ToList();
+
+            foreach (var item in cuenta)
+            {
+                if (item.Balance <= 0)
+                {
+                    item.Cerrada = true;
+                    db.SaveChanges();
+                }
+            }
+
+            return Json(new { cuenta = cuenta });
+
+           
+          
+
+        }  
+        
+        public JsonResult Obtener_Info_Cuentas_Desde_A_Pagar()
+        {
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var cuenta = db.Cuentas_Bancarias
+                .Where(x => x.Tipo_Cuenta != "Prestamo"
+                ).Where(x => x.Propietario_ID == UserId)
+                  .Where(x => x.Cerrada == false).ToList();
+
+          
+
+            return Json(new { cuenta = cuenta });
+
+           
+          
 
         }
     }
