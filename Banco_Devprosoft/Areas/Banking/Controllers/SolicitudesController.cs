@@ -59,9 +59,77 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
             var solicitud = db.Solicitudes_Cuentas.Find(Solicitud_ID);
 
+            var valid_User = db.Users.Where(x => x.Cedula == solicitud.Cedula).FirstOrDefault();
 
 
-            return Json("");
+            if (valid_User != null)
+            {
+                var Cuenta = new Cuenta_Bancaria
+                {
+                    Fecha_Creacion = DateTime.Now,
+                    Tipo_Cuenta = "Debito",
+                    Propietario_ID = valid_User.Id,
+                    Balance = 2000,
+                    Monto_Maximo = 0,
+                    Fecha_De_Corte = DateTime.Now,
+                    Fecha_Limite = DateTime.Now
+                    
+
+                };
+
+                db.Cuentas_Bancarias.Add(Cuenta);
+                db.SaveChanges();
+            }
+            else
+            {
+                var Primer_Nombre = solicitud.Nombres.Split(" ")[0];
+                var Primer_Apellido = solicitud.Apellidos.Split(" ")[0];
+
+                var Usuario = new ApplicationUser
+                {
+                    UserName = $"{Primer_Nombre}_{Primer_Apellido}",
+                    Nombres = solicitud.Nombres,
+                    Apellidos = solicitud.Apellidos,
+                    Cedula = solicitud.Cedula,
+                    Telefono = solicitud.Contacto_1,
+                    Email = solicitud.Correo,
+                    Direccion = solicitud.Direccion,
+                    Fecha_Creacion = DateTime.Now,
+                    EmailConfirmed = true
+                };
+
+                var password = Usuario.Cedula.Replace("-", "");
+
+                var crear_User = userManager.CreateAsync(Usuario, password);
+                crear_User.Wait();
+
+                var asignar_Rol = userManager.AddToRoleAsync(Usuario, "Cliente");
+                asignar_Rol.Wait();
+
+                var Cuenta = new Cuenta_Bancaria
+                {
+                    Fecha_Creacion = DateTime.Now,
+                    Tipo_Cuenta = "Debito",
+                    Propietario_ID = Usuario.Id,
+                    Balance = 2000,
+                    Monto_Maximo = 0,
+                    Fecha_De_Corte = DateTime.Now,
+                    Fecha_Limite = DateTime.Now
+
+
+                };
+
+
+                db.Cuentas_Bancarias.Add(Cuenta);
+                db.SaveChanges();
+
+            }
+
+            solicitud.Cerrada = true;
+            solicitud.Fecha_Cierre = DateTime.Now;
+
+            db.SaveChanges();
+            return Json(new { title = "Solicitud de Cuenta", text = "Cuenta creada exitósamente", icon = "success" });
         }
     }
 }

@@ -3,9 +3,52 @@
     ViewData["Title"] = "Mis_Transferencias";
 }
 
-<h1>Mis Transferencias</h1>
+<style>
 
 
+    .sombra_Jumbo {
+        transition: 500ms;
+    }
+
+        .sombra_Jumbo:hover {
+            box-shadow: #28a745 2px 1px 25px -3px;
+        }
+        .sombra_Jumbo:active {
+            box-shadow: #28a745 2px 1px 25px -3px;
+        }
+
+</style>
+
+
+<div class="jumbotron pt-4 sombra_Jumbo">
+
+
+    <h3 class="mb-4">Realizar Transferencia</h3>
+    <form>
+        <div class="row">
+
+            <div class="col-lg-4 col-sm-12">
+                <label for="Cuenta_ID">#Cuenta Destino</label>
+                <input id="Cuenta_ID" class="form-control" type="text" name="Cuenta_ID" placeholder="Introduzca el número de cuenta" />
+            </div>
+
+            <div class="col-lg-4 col-sm-12">
+                <label for="Monto">Monto</label>
+                <input id="Monto" class="form-control" type="text" name="Monto" placeholder="¿Qué cantidad desea transferir?" />
+
+            </div>
+
+            <div class="col-lg-4 col-sm-12">
+                <button class="btn btn-success text-light" style="margin-top: 32px;">Siguiente</button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+</div>
 
 
 

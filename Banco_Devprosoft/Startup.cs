@@ -43,6 +43,13 @@ namespace Banco_Devprosoft
             services.Configure<IdentityOptions>(options =>
             {
 
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
                 // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1440);
                 options.Lockout.AllowedForNewUsers = true;
@@ -52,6 +59,8 @@ namespace Banco_Devprosoft
                 "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline. //Comentario Starlin Marrero

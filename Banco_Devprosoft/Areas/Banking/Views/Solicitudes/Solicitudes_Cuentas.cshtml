@@ -67,7 +67,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h5 class="modal-title" id="Detalles_Solicitud_Label">Solicitud #0810. Fecha 28/03/2021  6:45 PM</h5>
+                <h5 class="modal-title" id="Detalles_Solicitud_Label"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -190,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger ">Rechazar</button>
-                <button type="button" class="btn btn-success text-light">Aprobar</button>
+                <button type="button" class="btn btn-success text-light" onclick="Aprobar_Solicitud_Cuenta()">Aprobar</button>
             </div>
         </div>
     </div>
@@ -291,7 +291,11 @@
             var solicitud = Solicitudes_List.find(x => x.solicitud_ID == Solicitud_ID);
 
             var trabaja = (solicitud.empleado) ? "Sí" : "No"; //Operador ternario
+            var fecha = moment(solicitud.fecha_Solicitud).format("lll");
 
+            var titulo = `Solicitud #${Solicitud_ID}. Fecha ${fecha}`;
+
+            $("#Detalles_Solicitud_Label").text(titulo);
             $("#nombresp").text(solicitud.nombres);
             $("#apellidosp").text(solicitud.apellidos);
             $("#cedulap").text(solicitud.cedula);
@@ -321,7 +325,7 @@
                     text: result.text,
                     icon: result.icon
                 })
-
+                Obtener_Solicitudes()
             });
 
 
