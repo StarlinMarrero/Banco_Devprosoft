@@ -95,14 +95,14 @@
                 <thead>
                     <tr>
                         <th>Transf #</th>
-                        <th>Fecha</th>
+                        <th>Fecha y Hora</th>
                         <th>Cta. Origen</th>
                         <th>Cta. Destino</th>
                         <th>Monto</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    @*<tr>
                         <td>2041</td>
                         <td>28/03/2021 - 3:10 AM</td>
                         <td>0801235</td>
@@ -115,7 +115,7 @@
                         <td>0801235</td>
                         <td>0752081</td>
                         <td>RD$20,000.00</td>
-                    </tr>
+                    </tr>*@
 
 
                 </tbody>
@@ -141,32 +141,12 @@
 
             $("li").removeClass("active");
             $("#li_Inicio").addClass("active");
-            Obtener_Info_Cuentas()
-            
+            Obtener_Info_Cuentas();
+            Obtener_Mis_Transferencias();
         });
 
 
-        $("#Tabla_Movimientos").dataTable({
-            language: {
-                "lengthMenu": "Mostrar _MENU_ Registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "_TOTAL_ transacciones en total.",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "<i class='fas fa-search'></i> Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "sProcessing": "Procesando...",
-            },
-            "destroy": "true",
-            "bLengthChange": false,
-            "bInfo": true,
-            "searching": true,
-        });
+      
 
         const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -188,6 +168,59 @@
                 $("#Balance_Cuenta").text(balance);
 
             });
+        }
+
+        function Obtener_Mis_Transferencias() {
+
+            $.get("/Banking/Transferencias/Obtener_Mis_Transferencias").done(function (result) {
+                $("#Tabla_Movimientos").dataTable({
+                    language: {
+                        "lengthMenu": "Mostrar _MENU_ Registros",
+                        "zeroRecords": "No se encontraron resultados",
+                        "info": "_TOTAL_ transacciones en total.",
+                        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "<i class='fas fa-search'></i> Buscar:",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "sProcessing": "Procesando...",
+                    },
+                    "destroy": "true",
+                    "bLengthChange": false,
+                    "bInfo": true,
+                    "searching": true,
+                    data: result.transferencias_List,
+                    columns: [
+                        {
+                            "data": "transferencia_ID"
+                        },
+                        {
+                            "data": "fecha_Transaccion", render: function (fecha) {
+                                return moment(fecha).format('lll');
+                            }
+                        },
+                        {
+                            "data": "cuenta_Origen_ID"
+                        },
+                        {
+                            "data": "cuenta_Destino_ID"
+                        },
+                        {
+                            "data": "monto", render: function (monto) {
+                                return `RD${formatter.format(monto)}`
+                            }
+                        },
+                    ],
+                    responsive: "true"
+                });
+
+
+            });
+
         }
        
     </script>

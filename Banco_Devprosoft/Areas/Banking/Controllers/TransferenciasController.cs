@@ -81,5 +81,16 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             return Json(new { title = "Transferencias", text = "Transferencia realizada exitósamente", icon = "success" });
         }
 
+        public JsonResult Obtener_Mis_Transferencias()
+        {
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var cuentas = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).FirstOrDefault();
+
+            var transferencias_List = db.Transferencias.Where(x => x.Cuenta_Origen_ID == cuentas.Cuenta_ID || x.Cuenta_Destino_ID == cuentas.Cuenta_ID).ToList();
+
+            return Json(new { transferencias_List });
+        }
+
     }
 }

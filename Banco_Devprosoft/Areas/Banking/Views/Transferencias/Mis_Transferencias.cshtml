@@ -50,7 +50,49 @@
 
 </div>
 
+<div class="card card-success card-outline">
 
+    <div class="card-header">
+
+        <h4 class="text-light text-center ml-2 col-lg">Historial de Movimientos</h4>
+
+
+    </div>
+    <div class="card-body">
+        <table id="Tabla_Movimientos" class="table table-responsive-lg table-hover w-100">
+            <thead>
+                <tr>
+                    <th>Transf #</th>
+                    <th>Fecha y Hora</th>
+                    <th>Cta. Origen</th>
+                    <th>Cta. Destino</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*<tr>
+                        <td>2041</td>
+                        <td>28/03/2021 - 3:10 AM</td>
+                        <td>0801235</td>
+                        <td>0752081</td>
+                        <td>RD$2,500.00</td>
+                    </tr>
+                    <tr>
+                        <td>2042</td>
+                        <td>28/03/2021 - 3:12 AM</td>
+                        <td>0801235</td>
+                        <td>0752081</td>
+                        <td>RD$20,000.00</td>
+                    </tr>*@
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
 
 
 
@@ -64,6 +106,8 @@
             $("li").removeClass("active");
             $("#li_Transferencias").addClass("active");
 
+            Obtener_Mis_Transferencias();
+
         });
 
         //function Verificar_Transferencia() {
@@ -71,6 +115,11 @@
         //    ////var data = { Cuenta_Destino: $("#"), Monto: }
 
         //}
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0
+        })
 
 
         $("#Form_Transferencia").submit(function () {
@@ -119,5 +168,58 @@
 
             return false;
         });
+
+        function Obtener_Mis_Transferencias() {
+
+            $.get("/Banking/Transferencias/Obtener_Mis_Transferencias").done(function (result) {
+                $("#Tabla_Movimientos").dataTable({
+                    language: {
+                        "lengthMenu": "Mostrar _MENU_ Registros",
+                        "zeroRecords": "No se encontraron resultados",
+                        "info": "_TOTAL_ transacciones en total.",
+                        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "<i class='fas fa-search'></i> Buscar:",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "sProcessing": "Procesando...",
+                    },
+                    "destroy": "true",
+                    "bLengthChange": false,
+                    "bInfo": true,
+                    "searching": true,
+                    data: result.transferencias_List,
+                    columns: [
+                        {
+                            "data": "transferencia_ID"
+                        },
+                        {
+                            "data": "fecha_Transaccion", render: function (fecha) {
+                                return moment(fecha).format('lll');
+                            }
+                        },
+                        {
+                            "data": "cuenta_Origen_ID"
+                        },
+                        {
+                            "data": "cuenta_Destino_ID"
+                        },
+                        {
+                            "data": "monto", render: function (monto) {
+                                return `RD${formatter.format(monto)}`
+                            }
+                        },
+                    ],
+                    responsive: "true"
+                });
+
+
+            });
+
+        }
     </script>
 }
