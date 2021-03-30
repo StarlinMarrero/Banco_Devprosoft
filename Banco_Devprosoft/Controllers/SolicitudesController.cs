@@ -110,7 +110,10 @@ namespace Banco_Devprosoft.Controllers
 
         public JsonResult Crear_Solicitud(Solicitud_Prestamo model)
         {
-            var valid = db.Solicitudes_Prestamos.Where(x => x.Cedula == model.Cedula).FirstOrDefault();
+            var valid = db.Solicitudes_Prestamos
+                .Where(x => x.Cedula == model.Cedula)
+                .Where(x => x.Cerrada == false)
+                .FirstOrDefault();
 
             if (valid != null)
             {
