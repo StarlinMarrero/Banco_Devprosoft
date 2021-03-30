@@ -172,11 +172,11 @@
                                 </a>
                             </li>
 
-                            <li id="li_Perfil">
+                            @*<li id="li_Perfil">
                                 <a href="/Banking/Usuarios/Perfil">
                                     <i class="fa fa-user"></i> Perfil
                                 </a>
-                            </li>
+                            </li>*@
                             @if (User.IsInRole("Cliente"))
                             {
                                 <li id="li_Transferencias">
@@ -185,11 +185,11 @@
                                     </a>
                                 </li>
 
-                                <li id="li_Prestamos">
+                                @*<li id="li_Prestamos">
                                     <a href="/Banking/Prestamos/Mis_Prestamos">
                                         <i class="fa fa-hand-holding-usd"></i> Préstamos
                                     </a>
-                                </li>
+                                </li>*@
 
                                 <li id="li_Pagos">
                                     <a href="/Banking/Pagos/Index">
@@ -338,18 +338,7 @@
         ga('send', 'pageview');
     </script>
 
-    <script>
 
-        $(document).ready(function () {
-            $("#Cerrar_Sesion").click(function () {
-
-                $("#Form_Cerrar_Sesion").submit();
-
-            })
-
-        })
-
-    </script>
     @*<script src="js/vendor.js"></script>
         <script src="js/app.js"></script>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -368,6 +357,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"><div class="responsive-bootstrap-toolkit"><div class="device-xs 				  hidden-sm-up"></div><div class="device-sm hidden-xs-down hidden-md-up"></div><div class="device-md hidden-sm-down hidden-lg-up"></div><div class="device-lg hidden-md-down hidden-xl-up"></div><div class="device-xl hidden-lg-down			  "></div></div><div class="jqvmap-label" style="display: none;"></div><div class="jqvmap-label" style="display: none;"></div>
+    <script>
+
+        $(document).ready(function () {
+            $("#Cerrar_Sesion").click(function () {
+
+                $("#Form_Cerrar_Sesion").submit();
+
+            })
+
+        })
+
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

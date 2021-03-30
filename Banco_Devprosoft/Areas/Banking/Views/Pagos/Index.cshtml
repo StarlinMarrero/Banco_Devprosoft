@@ -5,8 +5,9 @@
 
 <h3>Pagos</h3>
 
+<div id="msj" class="mt-3"></div>
 
-<div class="row  mb-5">
+<div class="row mb-5" id="row_forms">
     <div class="col-lg-3 col-sm-12">
         <label>Seleccione la cuenta a pagar</label>
         <select class="form-control" id="Select_Cuenta">
@@ -82,6 +83,15 @@
         function Obtener_Info_Cuentas_A_Pagar() {
 
             $.get("/Banking/Cuentas/Obtener_Info_Cuentas_A_Pagar").done(function (result) {
+
+                if (result.cuenta.length == 0) {
+
+                    $("#row_forms").empty();
+                    $("#msj").append(`<span class="alert alert-warning">Usted no tiene deudas con nosotros para realizar pago.</span>`);
+
+
+                    return false;
+                }
 
                 $("#Select_Cuenta").empty();
                 $.each(result.cuenta, function (i, item) {

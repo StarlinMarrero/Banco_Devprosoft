@@ -31,12 +31,12 @@ namespace Banco_Devprosoft.Models
         public int Mora { get; set; }
         public int Monto_Total { get; set; }
         public DateTime Fecha_Pago { get; set; }
-        public int Servicio_ID { get; set; }
-        [ForeignKey("Servicio_ID")]
-        public Prestamo Get_Prestamo { get; set; }
+        //public int Servicio_ID { get; set; }
+        //[ForeignKey("Servicio_ID")]
+        //public Prestamo Get_Prestamo { get; set; }
 
-        [ForeignKey("Servicio_ID")]
-        public Tarjeta Get_Tarjeta { get; set; }
+        //[ForeignKey("Servicio_ID")]
+        //public Tarjeta Get_Tarjeta { get; set; }
 
 
     }

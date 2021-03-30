@@ -26,13 +26,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             return View();
         }
 
-        public JsonResult Verificar_Transferencia(int Cuenta_Destino, int Monto)
+        public JsonResult Verificar_Transferencia(int Cuenta_Destino, int Cuenta_Desde, int Monto)
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
            
 
-            var cuenta = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).FirstOrDefault();
+            var cuenta = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).Where(x => x.Cuenta_ID == Cuenta_Desde).FirstOrDefault();
 
 
             var Validation_Destino = db.Cuentas_Bancarias.Find(Cuenta_Destino);
@@ -43,7 +43,10 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                 return Json(new { title = "Transferencias", text = "La cuenta no fué encontrada", icon = "error" });
 
             }
-
+            if (Validation_Destino.Cerrada == true)
+            {
+                return Json(new { title = "Transferencias", text = "La cuenta " + Cuenta_Destino + " De este clienta esta cerrada. ", icon = "info" });
+            }
             if (Monto > cuenta.Balance)
             {
                 return Json(new { title = "Transferencias", text = "Su cuenta posee menos balance del solicitado a transferir.", icon = "error" });
@@ -55,16 +58,20 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             return Json(new { Nombre_Completo });
         }
 
-        public JsonResult Realizar_Transferencia(int Cuenta_Destino, int Monto)
+        public JsonResult Realizar_Transferencia(int Cuenta_Destino, int Cuenta_Desde, int Monto)
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var cuenta_Origen = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).FirstOrDefault();
+            var cuenta_Origen = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId)
+                .Where(x => x.Cuenta_ID == Cuenta_Desde)
+                .FirstOrDefault();
 
             var cuenta_Destino = db.Cuentas_Bancarias.Find(Cuenta_Destino);
 
-            cuenta_Origen.Balance = cuenta_Origen.Balance - Monto;
-            cuenta_Destino.Balance = cuenta_Destino.Balance + Monto;
+         
+
+            cuenta_Origen.Balance -= Monto;
+            cuenta_Destino.Balance += Monto;
 
             var model = new Transferencia
             {
@@ -84,12 +91,28 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
         public JsonResult Obtener_Mis_Transferencias()
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var transferencias_List = new List<Transferencia>();
 
-            var cuentas = db.Cuentas_Bancarias.Where(x => x.Propietario_ID == UserId).FirstOrDefault();
+            var cuentas = db.Cuentas_Bancarias
+                .Where(x => x.Cerrada == false)
+                .Where(x => x.Propietario_ID == UserId).ToList();
 
-            var transferencias_List = db.Transferencias.Where(x => x.Cuenta_Origen_ID == cuentas.Cuenta_ID || x.Cuenta_Destino_ID == cuentas.Cuenta_ID).ToList();
+           //He tenido que hacerlo de esta forma, hay dificultades en los condificionales ||
 
-            return Json(new { transferencias_List });
+            foreach (var item in cuentas)
+            {
+                var lista = db.Transferencias.Where(x => x.Cuenta_Origen_ID == item.Cuenta_ID || x.Cuenta_Destino_ID == item.Cuenta_ID).ToList();
+
+                foreach (var item_list in lista)
+                {
+                    transferencias_List.Add(item_list);
+                }
+
+               
+            }
+
+
+            return Json(transferencias_List);
         }
 
     }

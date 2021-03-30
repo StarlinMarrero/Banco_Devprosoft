@@ -27,14 +27,18 @@
     <form id="Form_Transferencia">
         <div class="row">
 
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-3 col-sm-12">
                 <label for="Cuenta_ID">#Cuenta Destino</label>
-                <input id="Cuenta_ID" class="form-control" type="text" name="Cuenta_ID" placeholder="Introduzca el número de cuenta" required/>
+                <input id="Cuenta_ID" class="form-control" type="text" name="Cuenta_ID" placeholder="Introduzca el número de cuenta" required />
             </div>
-
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-3 col-sm-12">
+                <label>Desde Mi Cuenta</label>
+                <select class="form-control" id="Select_Mis_Cuenta">
+                </select>
+            </div>
+            <div class="col-lg-3 col-sm-12">
                 <label for="Monto">Monto</label>
-                <input id="Monto" class="form-control" type="text" name="Monto" placeholder="¿Qué cantidad desea transferir?" required/>
+                <input id="Monto" class="form-control" type="text" name="Monto" placeholder="¿Qué cantidad desea transferir?" required />
 
             </div>
 
@@ -107,7 +111,7 @@
             $("#li_Transferencias").addClass("active");
 
             Obtener_Mis_Transferencias();
-
+            Obtener_Info_Cuentas_Desde_A_Pagar();
         });
 
         //function Verificar_Transferencia() {
@@ -124,7 +128,7 @@
 
         $("#Form_Transferencia").submit(function () {
 
-            var data = { Cuenta_Destino: $("#Cuenta_ID").val(), Monto: $("#Monto").val() }
+            var data = { Cuenta_Destino: $("#Cuenta_ID").val(), Monto: $("#Monto").val(), Cuenta_Desde: $("#Select_Mis_Cuenta").val() }
 
             $.get("/Banking/Transferencias/Verificar_Transferencia", data).done(function (result) {
 
@@ -157,7 +161,8 @@
                                 })
 
                                 $("#Form_Transferencia")[0].reset();
-
+                                Obtener_Mis_Transferencias();
+                                Obtener_Info_Cuentas_Desde_A_Pagar();
                             });
 
                         }
@@ -172,6 +177,9 @@
         function Obtener_Mis_Transferencias() {
 
             $.get("/Banking/Transferencias/Obtener_Mis_Transferencias").done(function (result) {
+                console.log(result);
+
+
                 $("#Tabla_Movimientos").dataTable({
                     language: {
                         "lengthMenu": "Mostrar _MENU_ Registros",
@@ -192,7 +200,7 @@
                     "bLengthChange": false,
                     "bInfo": true,
                     "searching": true,
-                    data: result.transferencias_List,
+                    data: result,
                     columns: [
                         {
                             "data": "transferencia_ID"
@@ -212,10 +220,29 @@
                             "data": "monto", render: function (monto) {
                                 return `RD${formatter.format(monto)}`
                             }
-                        },
+                        }
+                     
                     ],
                     responsive: "true"
                 });
+
+
+            });
+
+        }
+
+        function Obtener_Info_Cuentas_Desde_A_Pagar() {
+
+            $.get("/Banking/Cuentas/Obtener_Info_Cuentas_Desde_A_Pagar").done(function (result) {
+
+                $("#Select_Mis_Cuenta").empty();
+                $.each(result.cuenta, function (i, item) {
+
+                    var op = `<option value="${item.cuenta_ID}">${item.tipo_Cuenta} $${item.balance}</option>`;
+                    $("#Select_Mis_Cuenta").append(op);
+                })
+
+                console.log(result);
 
 
             });

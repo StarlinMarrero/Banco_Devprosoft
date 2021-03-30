@@ -19,7 +19,7 @@ namespace Banco_Devprosoft.Models
 
         [ForeignKey("Cuenta_ID")]
         public Cuenta_Bancaria Get_Bancaria { get; set; }
-        public List<Pago> Lista_Pagos { get; set; }
+        //public List<Pago> Lista_Pagos { get; set; }
     }
 
     public class Solicitud_Tarjeta : Solicitud

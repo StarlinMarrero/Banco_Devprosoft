@@ -41,16 +41,16 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
             }
 
-            //var pago = new Pago
-            //{
-            //    Cuenta_Origen_ID = Cuenta_Debitar_Id,
-            //    Fecha_Pago = DateTime.Now,
-            //    Monto_Total = Monto,
-            //    Servicio_ID = Cuenta_A_Pagar_Id,
-                
-            //};
+            var pago = new Pago
+            {
+                Cuenta_Origen_ID = cuenta_Debitar.Cuenta_ID,
+                Fecha_Pago = DateTime.Now,
+                Monto_Total = Monto,
+                //Servicio_ID = cuenta_Pagar.Cuenta_ID,
 
-            //db.Pagos.Add(pago);
+            };
+
+            db.Pagos.Add(pago);
             //db.SaveChanges();
 
 
@@ -73,7 +73,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
             var cuentas = db.Cuentas_Bancarias
                 .Where(x => x.Propietario_ID == UserId && x.Tipo_Cuenta == "Debito" || x.Tipo_Cuenta == "Credito")
-
+                
                 //Falta poner bool aprobado
                 .ToList();
 
