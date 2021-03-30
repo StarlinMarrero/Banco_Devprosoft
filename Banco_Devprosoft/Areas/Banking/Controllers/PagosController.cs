@@ -41,6 +41,18 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
             }
 
+            //var pago = new Pago
+            //{
+            //    Cuenta_Origen_ID = Cuenta_Debitar_Id,
+            //    Fecha_Pago = DateTime.Now,
+            //    Monto_Total = Monto,
+            //    Servicio_ID = Cuenta_A_Pagar_Id,
+                
+            //};
+
+            //db.Pagos.Add(pago);
+            //db.SaveChanges();
+
 
             cuenta_Debitar.Balance = cuenta_Debitar.Balance - Monto;
 
@@ -60,7 +72,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var cuentas = db.Cuentas_Bancarias
-                .Where(x => x.Propietario_ID == UserId && x.Tipo_Cuenta == "Débito" || x.Tipo_Cuenta == "Crédito")
+                .Where(x => x.Propietario_ID == UserId && x.Tipo_Cuenta == "Debito" || x.Tipo_Cuenta == "Credito")
 
                 //Falta poner bool aprobado
                 .ToList();
@@ -71,17 +83,16 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             {
                 var pagos = db.Pagos.Where(x => x.Cuenta_Origen_ID == item.Cuenta_ID).ToList();
 
-                if(pagos != null)
+             
+
+                foreach (var pago in pagos)
                 {
 
-                    foreach (var pago in pagos)
-                    {
-
-                        PagosList.Add(pago);
-
-                    }
+                    PagosList.Add(pago);
 
                 }
+
+                
 
             }
 

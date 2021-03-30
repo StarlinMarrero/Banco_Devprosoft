@@ -144,8 +144,13 @@
 
             $("li").removeClass("active");
             $("#li_Inicio").addClass("active");
+
+            @if (User.IsInRole("Cliente")) {
+                
+                @:Obtener_Mis_Transferencias();
+
+            }
             Obtener_Info_Cuentas();
-            Obtener_Mis_Transferencias();
         });
 
 
@@ -171,8 +176,8 @@
                         <th scope="row">${item.tipo_Cuenta}</th>
                         <td>${item.cuenta_ID}</td>
                          <th scope="row">${item.tipo_Cuenta}</th>
-                        <td>RD$</td>
-                        <td>${item.balance}</td>
+                        <td>RD</td>
+                        <td>${formatter.format(item.balance)}</td>
                     </tr>`;
                     $("#table_Mis_Cuentas>tbody").append(th);
                 })

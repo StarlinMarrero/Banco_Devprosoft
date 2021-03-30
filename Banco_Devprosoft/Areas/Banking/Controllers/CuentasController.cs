@@ -57,7 +57,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                 .Where(x => x.Tipo_Cuenta == "Prestamo" || x.Tipo_Cuenta == "Credito" ||
                 x.Tipo_Cuenta == "Débito"
                 ).Where(x => x.Propietario_ID == UserId)
-                .Where(x => x.Cerrada == true)
+                .Where(x => x.Cerrada == false)
                 //Falta poner bool aprobado
                 .ToList();
 

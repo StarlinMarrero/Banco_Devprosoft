@@ -219,11 +219,11 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                     Fecha_Creacion = DateTime.Now,
                     Tipo_Cuenta = "Prestamo",
                     Propietario_ID = Usuario.Id,
-                    Balance = 2000,
+                    Balance = solicitud.Monto_Solicitado,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now.AddDays(30),
-                    Fecha_Limite = DateTime.Now,
-                    
+                    Fecha_De_Corte = DateTime.Now.AddDays(29),
+                    Fecha_Limite = DateTime.Now.AddDays(35)
+
 
 
                 };
