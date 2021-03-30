@@ -6,7 +6,7 @@
 <h3>Pagos</h3>
 
 
-<div class="row">
+<div class="row  mb-5">
     <div class="col-lg-3 col-sm-12">
         <label>Seleccione la cuenta a pagar</label>
         <select class="form-control" id="Select_Cuenta">
@@ -20,7 +20,7 @@
 
     <div class="col-lg-3 col-sm-12">
         <label>Monto A Pagar</label>
-        <input id="Monto" type="number" placeholder="Monto a pagar" class="form-control"/>
+        <input id="Monto" type="number" placeholder="Monto a pagar" class="form-control" />
     </div>
 
     <div class="col-lg-3 col-sm-12">
@@ -32,6 +32,35 @@
 </div>
 
 
+<div class="card card-success card-outline">
+
+    <div class="card-header">
+
+        <h4 class="text-light text-center ml-2 col-lg">Historial de Pagos</h4>
+
+
+    </div>
+    <div class="card-body">
+        <table id="Tabla_Pagos" class="table table-responsive-lg table-hover w-100">
+            <thead>
+                <tr>
+                    <th>Transacción #</th>
+                    <th>Fecha y Hora</th>
+                    <th>Cta. Origen</th>
+                    <th>Cta. Préstamo</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
 
 
 
@@ -47,6 +76,7 @@
             $("#li_Pagos").addClass("active");
             Obtener_Info_Cuentas_A_Pagar();
             Obtener_Info_Cuentas_Desde_A_Pagar();
+            Obtener_Pagos()
         });
 
         function Obtener_Info_Cuentas_A_Pagar() {
@@ -120,6 +150,61 @@
 
 
         }
+
+
+        function Obtener_Pagos() {
+
+            $.get("/Banking/Pagos/Obtener_Pagos").done(function (result) {
+                $("#Tabla_Pagos").dataTable({
+                    language: {
+                        "lengthMenu": "Mostrar _MENU_ Registros",
+                        "zeroRecords": "No se encontraron resultados",
+                        "info": "_TOTAL_ transacciones en total.",
+                        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "<i class='fas fa-search'></i> Buscar:",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "sProcessing": "Procesando...",
+                    },
+                    "destroy": "true",
+                    "bLengthChange": false,
+                    "bInfo": true,
+                    "searching": true,
+                    data: result.pagosList,
+                    columns: [
+                        {
+                            "data": "pago_ID"
+                        },
+                        {
+                            "data": "fecha_Pago", render: function (fecha) {
+                                return moment(fecha).format('lll');
+                            }
+                        },
+                        {
+                            "data": "cuenta_Origen_ID"
+                        },
+                        {
+                            "data": "servicio_ID"
+                        },
+                        {
+                            "data": "monto_Total", render: function (monto) {
+                                return `RD${formatter.format(monto)}`
+                            }
+                        },
+                    ],
+                    responsive: "true"
+                });
+
+
+            });
+
+        }
+
 
     </script>
 }

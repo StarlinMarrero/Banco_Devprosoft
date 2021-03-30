@@ -177,25 +177,26 @@
                                     <i class="fa fa-user"></i> Perfil
                                 </a>
                             </li>
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                <li id="li_Transferencias">
+                                    <a href="/Banking/Transferencias/Mis_Transferencias">
+                                        <i class="fa fa-exchange-alt"></i> Transferencias
+                                    </a>
+                                </li>
 
-                            <li id="li_Transferencias">
-                                <a href="/Banking/Transferencias/Mis_Transferencias">
-                                    <i class="fa fa-exchange-alt"></i> Transferencias
-                                </a>
-                            </li>
+                                <li id="li_Prestamos">
+                                    <a href="/Banking/Prestamos/Mis_Prestamos">
+                                        <i class="fa fa-hand-holding-usd"></i> Préstamos
+                                    </a>
+                                </li>
 
-                            <li id="li_Prestamos">
-                                <a href="/Banking/Prestamos/Mis_Prestamos">
-                                    <i class="fa fa-hand-holding-usd"></i> Préstamos
-                                </a>
-                            </li>
-
-                            <li id="li_Pagos">
-                                <a href="/Banking/Pagos/Index">
-                                    <i class="fa fa-file-invoice-dollar"></i> Pagos
-                                </a>
-                            </li>
-
+                                <li id="li_Pagos">
+                                    <a href="/Banking/Pagos/Index">
+                                        <i class="fa fa-file-invoice-dollar"></i> Pagos
+                                    </a>
+                                </li>
+                            }
                             @if (User.IsInRole("Gerente"))
                             {
                                 <li id="li_Crear_Usuarios">
