@@ -89,7 +89,11 @@
                         </div>
                     </div>
 
-                    <div class="col-12 mt-3"><button class="btn btn-primary" id="Btn_Solicitar"><i class="fas fa-sign-in-alt"></i> Solicitar</button></div>
+                    <div class="col-12 mt-3"><button class="btn btn-primary" id="Btn_Solicitar">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Solicitar
+                        <span id="spinner_solicitar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                    </button></div>
                 </div>
             </form>
 
@@ -202,7 +206,7 @@
             var data_cuentas_solicitadas = $("#Form_Nuevo_Usuario").serialize();
 
             console.log(data_cuentas_solicitadas)
-
+            $("#spinner_solicitar").removeAttr("hidden", true);
             $.post("/Solicitudes/add_Solicitud_Cuentas", data_cuentas_solicitadas).done(function (resultado) {
 
                 Swal.fire({
@@ -212,6 +216,7 @@
                 });
 
                 $("#Form_Nuevo_Usuario")[0].reset();
+                $("#spinner_solicitar").attr("hidden", true);
 
             });
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Banco_Devprosoft.Controllers
@@ -40,14 +41,14 @@ namespace Banco_Devprosoft.Controllers
                 return Json(new { title = "Solicitud de Cuentas", text = "Usted ya tiene una solicitud pendiente. Puede visitar nuestras oficinas para consultar su estado.", icon = "info" });
 
             }
-            var salario_string = Convert.ToString(model.Salario);
-            var salario_mark = salario_string.Split(",")[0];
+            //var salario_string = Convert.ToString(model.Salario);
+            var salario_mark = model.Salario.Replace(",", "");
             var salario_int = Int32.Parse(salario_mark);
             var Solicitud = new Solicitud_Cuenta
             {
                 Nombres = model.Nombres,
                 Apellidos = model.Apellidos,
-                Salario = salario_int,
+                Salario = salario_int.ToString(),
                 Cedula = model.Cedula,
                 Contacto_1 = model.Contacto_1,
                 Contacto_2 = model.Contacto_2,
@@ -91,7 +92,7 @@ namespace Banco_Devprosoft.Controllers
             {
                 Nombres = user.Nombres,
                 Apellidos = user.Apellidos,
-                Salario = user.Sueldo,
+                Salario = user.Sueldo.ToString(),
                 Cedula = user.Cedula,
                 Contacto_1 = user.Contacto_1,
                 Contacto_2 = user.Contacto_2,

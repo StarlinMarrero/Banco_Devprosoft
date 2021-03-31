@@ -252,7 +252,18 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             return Json(new { title = "Solicitud de Cuenta", text = "Cuenta creada exitósamente", icon = "success" });
         }
 
+        public JsonResult Rechazar_Solicitud_Cuenta(int Solicitud_ID)
+        {
+            var solicitud = db.Solicitudes_Cuentas.Find(Solicitud_ID);
 
+            //solicitud.Cerrada = true;
+            //solicitud.Fecha_Cierre = DateTime.Now.AddHours(3);
+            //solicitud.Aprobado = false;
+            db.Solicitudes_Cuentas.Remove(solicitud);
+            db.SaveChanges();
+
+            return Json(new { title = "Solicitud de Cuenta", text = "Cuenta Rechazada", icon = "success" });
+        }
 
     }
 }

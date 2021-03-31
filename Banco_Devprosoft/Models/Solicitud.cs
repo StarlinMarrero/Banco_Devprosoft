@@ -20,7 +20,7 @@ namespace Banco_Devprosoft.Models
         public string Direccion { get; set; }
         public bool Empleado { get; set; }
         public string Empresa { get; set; }
-        public int? Salario { get; set; }
+        public string Salario { get; set; }
         public string Ocupacion { get; set; }
         public bool Cerrada { get; set; }
         public string Tipo_Cuenta { get; set; }

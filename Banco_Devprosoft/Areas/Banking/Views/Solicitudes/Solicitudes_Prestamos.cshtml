@@ -176,6 +176,16 @@
                                 <p id="salariop" class="text-right"></p>
                             </div>
                         </div>
+                    </div>  
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label><i class="fas fa-coins text-secondary"></i> Monto Solicitado:</label>
+                            </div>
+                            <div class="col-6">
+                                <p id="monto_Solicitado" class="text-right"></p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -293,6 +303,7 @@
             $("#empresap").text(solicitud.empresa);
             $("#ocupacionp").text(solicitud.ocupacion);
             $("#salariop").text(solicitud.salario);
+            $("#monto_Solicitado").text(solicitud.monto_Solicitado);
 
             solicitud_Abierta = Solicitud_ID;
 

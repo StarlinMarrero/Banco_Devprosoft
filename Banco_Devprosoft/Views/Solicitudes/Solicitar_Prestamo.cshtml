@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-6">
                         <label>Cédula</label>
-                        <input type="number" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
+                        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
                     </div>
                     <div class="col-6">
                         <label>Correo</label>
@@ -31,11 +31,11 @@
                     </div>
                     <div class="col-6">
                         <label>Contacto #1</label>
-                        <input type="number" name="Contacto_1" class="form-control" placeholder="Ingrese su contacto #1" required />
+                        <input type="text" name="Contacto_1" class="tel form-control" placeholder="Ingrese su contacto #1" required />
                     </div>
                     <div class="col-6">
                         <label>Contacto #2</label>
-                        <input type="number" name="Contacto_2" class="form-control" placeholder="Ingrese su contacto #2" />
+                        <input type="text" name="Contacto_2" class="tel form-control" placeholder="Ingrese su contacto #2" />
                     </div>
                     <div class="col-12">
                         <label>Dirección</label>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-6">
                         <label>Salario</label>
-                        <input type="number" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
+                        <input type="text" id="Salario" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
                     </div>
                     <div class="col-6">
                         <label>Ocupación</label>
@@ -89,6 +89,18 @@
 
     
     <script type="text/javascript">
+
+        $(document).ready(function () { //Codigo a ejecutar cuando la página termine de cargar
+
+            //Declaración de Mascaras
+
+            $(".tel").mask('(000) 000-0000');
+            $("#Cedula").mask('000-0000000-0');
+            $("#Salario").mask('000,000,000', { reverse: true })
+
+
+            //$(".Empleado_Radio").setCustomValidity("Debes seleccionar una opción");
+        });
 
 
         $("#formulario").submit(function () {
