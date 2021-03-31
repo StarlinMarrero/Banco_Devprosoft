@@ -69,13 +69,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             {
                 var Cuenta = new Cuenta_Bancaria
                 {
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     Tipo_Cuenta = "Debito",
                     Propietario_ID = valid_User.Id,
                     Balance = 2000,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now,
-                    Fecha_Limite = DateTime.Now
+                    Fecha_De_Corte = DateTime.Now.AddHours(3),
+                    Fecha_Limite = DateTime.Now.AddHours(3)
                     
 
                 };
@@ -97,7 +97,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                     Telefono = solicitud.Contacto_1,
                     Email = solicitud.Correo,
                     Direccion = solicitud.Direccion,
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     EmailConfirmed = true
                 };
 
@@ -123,13 +123,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
                 var Cuenta = new Cuenta_Bancaria
                 {
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     Tipo_Cuenta = "Debito",
                     Propietario_ID = Usuario.Id,
                     Balance = 2000,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now.AddDays(30),
-                    Fecha_Limite = DateTime.Now,
+                    Fecha_De_Corte = DateTime.Now.AddHours(3).AddDays(30),
+                    Fecha_Limite = DateTime.Now.AddHours(3),
                     
 
 
@@ -142,7 +142,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             }
 
             solicitud.Cerrada = true;
-            solicitud.Fecha_Cierre = DateTime.Now;
+            solicitud.Fecha_Cierre = DateTime.Now.AddHours(3);
 
             db.SaveChanges();
             return Json(new { title = "Solicitud de Cuenta", text = "Cuenta creada exitósamente", icon = "success" });
@@ -167,13 +167,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
                 var Cuenta = new Cuenta_Bancaria
                 {
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     Tipo_Cuenta = "Prestamo",
                     Propietario_ID = valid_User.Id,
                     Balance = solicitud.Monto_Solicitado,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now.AddDays(29),
-                    Fecha_Limite = DateTime.Now.AddDays(35)
+                    Fecha_De_Corte = DateTime.Now.AddHours(3).AddDays(29),
+                    Fecha_Limite = DateTime.Now.AddHours(3).AddDays(35)
                     
 
                 };
@@ -197,7 +197,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                     Telefono = solicitud.Contacto_1,
                     Email = solicitud.Correo,
                     Direccion = solicitud.Direccion,
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     EmailConfirmed = true
                 };
 
@@ -223,13 +223,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
                 var Cuenta = new Cuenta_Bancaria
                 {
-                    Fecha_Creacion = DateTime.Now,
+                    Fecha_Creacion = DateTime.Now.AddHours(3),
                     Tipo_Cuenta = "Prestamo",
                     Propietario_ID = Usuario.Id,
                     Balance = solicitud.Monto_Solicitado,
                     Monto_Maximo = 0,
-                    Fecha_De_Corte = DateTime.Now.AddDays(29),
-                    Fecha_Limite = DateTime.Now.AddDays(35)
+                    Fecha_De_Corte = DateTime.Now.AddHours(3).AddDays(29),
+                    Fecha_Limite = DateTime.Now.AddHours(3).AddDays(35)
 
 
 
@@ -246,7 +246,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             solicitud.Cerrada = true;
             solicitud.Aprobado = true;
             solicitud.Aprobado_Por = Usuario_Login.Nombres + " " + Usuario_Login.Apellidos;
-            solicitud.Fecha_Cierre = DateTime.Now;
+            solicitud.Fecha_Cierre = DateTime.Now.AddHours(3);
 
             db.SaveChanges();
             return Json(new { title = "Solicitud de Cuenta", text = "Cuenta creada exitósamente", icon = "success" });

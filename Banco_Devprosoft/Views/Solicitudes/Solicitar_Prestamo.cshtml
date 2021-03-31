@@ -9,63 +9,112 @@
     <h3><i class="fas fa-coins text-warning"></i> Solicitar un prestamo</h3>
     <div class="row">
 
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12">
 
             <form id="formulario">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Nombres</label>
-                        <input type="text" name="Nombres" class="form-control" placeholder="Ingrese sus nombres" required />
+                        <input type="text" name="Nombres" class="form-control" placeholder="Ingrese sus nombres" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Apellidos</label>
-                        <input type="text" name="Apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required />
+                        <input type="text" name="Apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Cédula</label>
-                        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
+                        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required="" maxlength="13">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Correo</label>
-                        <input type="email" name="Correo" class="form-control" placeholder="Ingrese su Correo" required />
+                        <input type="email" name="Correo" class="form-control" placeholder="Ingrese su Correo" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-6">
                         <label>Contacto #1</label>
-                        <input type="text" name="Contacto_1" class="tel form-control" placeholder="Ingrese su contacto #1" required />
+                        <input type="text" name="Contacto_1" class="tel form-control" placeholder="Ingrese su contacto #1" required="" maxlength="14">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-6">
                         <label>Contacto #2</label>
-                        <input type="text" name="Contacto_2" class="tel form-control" placeholder="Ingrese su contacto #2" />
+                        <input type="text" name="Contacto_2" class="tel form-control" placeholder="Ingrese su contacto #2" maxlength="14">
                     </div>
                     <div class="col-12">
                         <label>Dirección</label>
-                        <input type="text" name="Direccion" class="form-control" placeholder="Ingrese la direccion" required />
+                        <input type="text" name="Direccion" class="form-control" placeholder="Ingrese la direccion" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Empresa</label>
-                        <input type="text" name="Empresa" class="form-control" placeholder="Nombre de la empresa" required />
+                        <input type="text" name="Empresa" class="form-control" placeholder="Nombre de la empresa" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Salario</label>
-                        <input type="text" id="Salario" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
+                        <input type="text" id="Salario" name="Salario" class="form-control" placeholder="Ingrese su Salario" required="" maxlength="11">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Ocupación</label>
-                        <input type="text" name="Ocupacion" class="form-control" placeholder="Ingrese Su Ocupación" required />
+                        <input type="text" name="Ocupacion" class="form-control" placeholder="Ingrese Su Ocupación" required="">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <label>Monto Solicitado</label>
-                        <input type="text" name="Monto_Solicitado" class="form-control" placeholder="Ingrese el Monto a solicitar" required />
+                        <input type="text" name="Monto_Solicitado" class="form-control" placeholder="Ingrese el Monto a solicitar" required="">
                     </div>
                     <div class="col-12 mt-3">
-                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Solicitar</button>
+                        <button class="btn btn-primary"><svg class="svg-inline--fa fa-paper-plane fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"></path></svg><!-- <i class="fas fa-paper-plane"></i> Font Awesome fontawesome.com --> Solicitar</button>
                     </div>
                 </div>
+                @*<div class="row">
+            <div class="col-6">
+                <label>Nombres</label>
+                <input type="text" name="Nombres" class="form-control" placeholder="Ingrese sus nombres" required />
+            </div>
+            <div class="col-6">
+                <label>Apellidos</label>
+                <input type="text" name="Apellidos" class="form-control" placeholder="Ingrese sus Apellidos" required />
+            </div>
+            <div class="col-6">
+                <label>Cédula</label>
+                <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Ingrese la Cedula" required />
+            </div>
+            <div class="col-6">
+                <label>Correo</label>
+                <input type="email" name="Correo" class="form-control" placeholder="Ingrese su Correo" required />
+            </div>
+            <div class="col-6">
+                <label>Contacto #1</label>
+                <input type="text" name="Contacto_1" class="tel form-control" placeholder="Ingrese su contacto #1" required />
+            </div>
+            <div class="col-6">
+                <label>Contacto #2</label>
+                <input type="text" name="Contacto_2" class="tel form-control" placeholder="Ingrese su contacto #2" />
+            </div>
+            <div class="col-12">
+                <label>Dirección</label>
+                <input type="text" name="Direccion" class="form-control" placeholder="Ingrese la direccion" required />
+            </div>
+            <div class="col-6">
+                <label>Empresa</label>
+                <input type="text" name="Empresa" class="form-control" placeholder="Nombre de la empresa" required />
+            </div>
+            <div class="col-6">
+                <label>Salario</label>
+                <input type="text" id="Salario" name="Salario" class="form-control" placeholder="Ingrese su Salario" required />
+            </div>
+            <div class="col-6">
+                <label>Ocupación</label>
+                <input type="text" name="Ocupacion" class="form-control" placeholder="Ingrese Su Ocupación" required />
+            </div>
+            <div class="col-6">
+                <label>Monto Solicitado</label>
+                <input type="text" name="Monto_Solicitado" class="form-control" placeholder="Ingrese el Monto a solicitar" required />
+            </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Solicitar</button>
+            </div>
+        </div>*@
             </form>
 
         </div>
 
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12">
             <h3 class="text-center text-primary">
             </h3>
             <div class="jumbotron jumbotron-fluid">

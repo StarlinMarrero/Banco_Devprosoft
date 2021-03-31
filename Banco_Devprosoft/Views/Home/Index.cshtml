@@ -12,6 +12,15 @@
         padding-bottom: 8rem;
     }
 
+    .fondo_texto { /* Fallback for web browsers that doesn't support RGBa */
+        background: rgb(0, 0, 0) transparent; /* RGBa with 0.6 opacity */
+        background: rgba(0, 0, 0, 0.6); /* For IE 5.5 - 7*/
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000); /* For IE 8*/
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+    }
 </style>
 
 
@@ -19,16 +28,22 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">Banco Devprosoft - Universidad <span class="text-primary">O&M</span></h1>
+            <div class="col-xl-9 mx-auto fondo_titulo">
+                <div class="fondo_texto">
+                    <h1 class="mb-5">Banco Devprosoft - Universidad <span class="text-primary">O&M</span></h1>
+                </div>
+                <div class="fondo_opaco">
+
+                </div>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
                     <div class="form-row">
-                    
+
                         <div class="col-12">
                             <a href="/Solicitudes/Solicitar_Prestamo" type="submit" class="btn btn-lg btn-primary">Solicitar Prestamo</a>
                             <a href="/Solicitudes/Solicitar_Cuenta" type="submit" class="btn btn-lg btn-success">Solicitar Cuenta</a>
+                            <a href="/Banking" class="btn btn-lg btn-warning mt-sm-3 mt-md-0 mt-lg-0">Internet BanKing</a>
                         </div>
                     </div>
                 </form>
@@ -76,3 +91,58 @@
         </div>
     </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Grupo De La Universidad O&M</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-center"><i class="fas fa-users text-primary"></i> Grupo Devprosoft - POO Tema IV</h5>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Starlin Marrero - 16-SIST-1-083</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Gaylord Sterling Mateo Guzman - 11-SISN-1-080</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Jose Antonio Ramirez Martinez - 17-EISN-1-217</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Aneury Capellan - 17-EISN-1-199</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Estefany Genao - 19-MISN-1-083</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Cristián Bautista Mejía - 20-EISN-1-215</li>
+                    <li class="list-group-item"><i class="fas fa-user-alt text-success"></i> Juan Daniel Minaya De león - 19-SISN-1-052</li>
+                </ul>
+                <hr />
+
+                <p>
+                    Este sistema está desarrollado para fines de estudio de la <b>Universidad Dominicana O&M.</b>
+                    <br />
+                    Somos un grupo de desarrollo llamado <b>Devprosoft.com.do</b>, actualmente estudiantes de la <b>Universidad Dominicana O&M.</b>
+                </p>
+                <small>No somos responsables de la información filtrada en este sistema.</small>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">De Acuerdo</button>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            $("#staticBackdrop").modal("show");
+
+
+        });
+    </script>
+
+}

@@ -56,7 +56,7 @@ namespace Banco_Devprosoft.Controllers
                 Empleado = model.Empleado,
                 Tipo_De_Cuenta = model.Tipo_Cuenta,
                 Empresa = model.Empresa,
-                Fecha_Solicitud = DateTime.Now,
+                Fecha_Solicitud = DateTime.Now.AddHours(3),
                 Ocupacion = model.Ocupacion,
                 Direccion = model.Direccion,
                 
@@ -100,7 +100,7 @@ namespace Banco_Devprosoft.Controllers
                 Empleado = user.Trabaja,
                 Tipo_De_Cuenta = Tipo_Cuenta,
                 Empresa = user.Empresa,
-                Fecha_Solicitud = DateTime.Now,
+                Fecha_Solicitud = DateTime.Now.AddHours(3).AddHours(3),
                 Ocupacion = user.Ocupacion
             };
 
@@ -139,7 +139,7 @@ namespace Banco_Devprosoft.Controllers
                 Cedula = model.Cedula,
                 Ocupacion = model.Ocupacion,
                 Empresa = model.Empresa,
-                Fecha_Solicitud = DateTime.Now,
+                Fecha_Solicitud = DateTime.Now.AddHours(3),
                 Empleado = model.Empleado,
                 Monto_Solicitado = model.Monto_Solicitado,
                 Plazo_Solicitado = model.Plazo_Solicitado

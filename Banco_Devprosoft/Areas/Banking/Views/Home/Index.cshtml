@@ -137,7 +137,7 @@
 
         $(document).ready(function () {
 
-            $("#Tabla_Movimientos").DataTable();
+            //$("#Tabla_Movimientos").DataTable();
             $(".paginate_button.active > a").addClass("bg-success");
             $(".paginate_button.active > a").addClass("text-light");
             $(".paginate_button.active").removeClass("active");
@@ -191,6 +191,7 @@
         function Obtener_Mis_Transferencias() {
 
             $.get("/Banking/Transferencias/Obtener_Mis_Transferencias").done(function (result) {
+                console.log(result);
                 $("#Tabla_Movimientos").dataTable({
                     language: {
                         "lengthMenu": "Mostrar _MENU_ Registros",
@@ -211,7 +212,7 @@
                     "bLengthChange": false,
                     "bInfo": true,
                     "searching": true,
-                    data: result.transferencias_List,
+                    data: result,
                     columns: [
                         {
                             "data": "transferencia_ID"

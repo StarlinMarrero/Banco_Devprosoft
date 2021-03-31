@@ -77,7 +77,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
             {
                 Cuenta_Destino_ID = Cuenta_Destino,
                 Cuenta_Origen_ID = cuenta_Origen.Cuenta_ID,
-                Fecha_Transaccion = DateTime.Now,
+                Fecha_Transaccion = DateTime.Now.AddHours(3).AddHours(3),
                 Monto = Monto
 
             };
