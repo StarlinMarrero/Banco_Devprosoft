@@ -46,7 +46,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                 Cuenta_Origen_ID = cuenta_Debitar.Cuenta_ID,
                 Fecha_Pago = DateTime.Now,
                 Monto_Total = Monto,
-                //Servicio_ID = cuenta_Pagar.Cuenta_ID,
+                Cuenta_Destino_ID = cuenta_Pagar.Cuenta_ID,
 
             };
 

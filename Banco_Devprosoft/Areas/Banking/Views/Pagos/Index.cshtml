@@ -48,7 +48,7 @@
                     <th>Transacción #</th>
                     <th>Fecha y Hora</th>
                     <th>Cta. Origen</th>
-                    <th>Cta. Préstamo</th>
+                    <th>Cta. Destino</th>
                     <th>Monto</th>
                 </tr>
             </thead>
@@ -199,11 +199,11 @@
                             "data": "cuenta_Origen_ID"
                         },
                         {
-                            "data": "servicio_ID"
+                            "data": "cuenta_Destino_ID"
                         },
                         {
                             "data": "monto_Total", render: function (monto) {
-                                return `RD${formatter.format(monto)}`
+                                return `RD${monto}`
                             }
                         },
                     ],

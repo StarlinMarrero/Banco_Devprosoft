@@ -158,6 +158,13 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
 
             if (valid_User != null)
             {
+
+                var cuenta_usuario = db.Cuentas_Bancarias
+                    .Where(x => x.Propietario_ID == valid_User.Id)
+                    .Where(x => x.Cerrada == false).FirstOrDefault();
+
+                cuenta_usuario.Balance += solicitud.Monto_Solicitado;
+
                 var Cuenta = new Cuenta_Bancaria
                 {
                     Fecha_Creacion = DateTime.Now,
@@ -170,7 +177,7 @@ namespace Banco_Devprosoft.Areas.Banking.Controllers
                     
 
                 };
-            
+                
 
                 db.Cuentas_Bancarias.Add(Cuenta);
                 db.SaveChanges();
