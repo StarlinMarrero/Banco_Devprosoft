@@ -31,7 +31,7 @@ namespace Banco_Devprosoft.Controllers
             return View();
         }
 
-        public JsonResult add_Solicitud_Cuentas(Solicitud_Cuenta model)
+        public JsonResult add_Solicitud_Cuentas(Solicitud model)
         {
             var validacion = db.Solicitudes_Cuentas.Where(p => p.Cedula == model.Cedula).FirstOrDefault();
 
@@ -40,21 +40,25 @@ namespace Banco_Devprosoft.Controllers
                 return Json(new { title = "Solicitud de Cuentas", text = "Usted ya tiene una solicitud pendiente. Puede visitar nuestras oficinas para consultar su estado.", icon = "info" });
 
             }
-
+            var salario_string = Convert.ToString(model.Salario);
+            var salario_mark = salario_string.Split(",")[0];
+            var salario_int = Int32.Parse(salario_mark);
             var Solicitud = new Solicitud_Cuenta
             {
                 Nombres = model.Nombres,
                 Apellidos = model.Apellidos,
-                Salario = model.Salario,
+                Salario = salario_int,
                 Cedula = model.Cedula,
                 Contacto_1 = model.Contacto_1,
                 Contacto_2 = model.Contacto_2,
                 Correo = model.Correo,
                 Empleado = model.Empleado,
-                Tipo_De_Cuenta = model.Tipo_De_Cuenta,
+                Tipo_De_Cuenta = model.Tipo_Cuenta,
                 Empresa = model.Empresa,
                 Fecha_Solicitud = DateTime.Now,
                 Ocupacion = model.Ocupacion,
+                Direccion = model.Direccion,
+                
             };
 
             db.Solicitudes_Cuentas.Add(Solicitud);

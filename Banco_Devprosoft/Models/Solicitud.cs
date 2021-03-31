@@ -23,6 +23,7 @@ namespace Banco_Devprosoft.Models
         public int? Salario { get; set; }
         public string Ocupacion { get; set; }
         public bool Cerrada { get; set; }
+        public string Tipo_Cuenta { get; set; }
         public DateTime Fecha_Cierre { get; set; }
         public DateTime Fecha_Solicitud { get; set; }
 
