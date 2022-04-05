@@ -13,30 +13,8 @@
 
     var Nombre_Completo = $"{Usuario.UserName.Replace('_', ' ')}";
 
-
 }
-
 <!DOCTYPE html>
-
-@*<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Layout</title>
-    </head>
-    <body>
-
-
-        <div class="container">
-
-
-        </div>
-
-
-
-
-
-    </body>
-    </html>*@
 
 <html class="no-js" lang="en">
 <head>
@@ -57,18 +35,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/af-2.3.5/b-1.7.0/cr-1.5.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rr-1.2.7/sc-2.0.3/datatables.min.css" />
     <!-- Theme initialization -->
     <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    @*@*<script>
-            var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
-                {};
-            var themeName = themeSettings.themeName || '';
-            if (themeName) {
-                document.write('<link rel="stylesheet" id="theme-style" href="css/app-' + themeName + '.css">');
-            }
-            else {
-                document.write('<link rel="stylesheet" id="theme-style" href="css/app.css">');
-            }
-        </script>*@
-    @*<link rel="stylesheet" id="theme-style" href="css/app.css">*@
+
     <style type="text/css">
         .jqstooltip {
             position: absolute;
@@ -95,6 +62,7 @@
             text-align: left;
         }
     </style>
+
 </head>
 <body class="loaded">
     <div class="main-wrapper">
@@ -184,12 +152,6 @@
                                         <i class="fa fa-exchange-alt"></i> Transferencias
                                     </a>
                                 </li>
-
-                                @*<li id="li_Prestamos">
-                                    <a href="/Banking/Prestamos/Mis_Prestamos">
-                                        <i class="fa fa-hand-holding-usd"></i> Préstamos
-                                    </a>
-                                </li>*@
 
                                 <li id="li_Pagos">
                                     <a href="/Banking/Pagos/Index">
