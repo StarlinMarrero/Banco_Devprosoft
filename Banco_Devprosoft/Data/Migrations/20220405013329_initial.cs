@@ -3,12 +3,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Banco_Devprosoft.Data.Migrations
 {
-    public partial class CreaciondeTablasPrestamossolicitudCuentasTarjeta : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
+                name: "Apellidos",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
                 name: "Cedula",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Contacto_1",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Contacto_2",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
@@ -40,6 +58,12 @@ namespace Banco_Devprosoft.Data.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
+                name: "Nombres",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
                 name: "Ocupacion",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
@@ -49,6 +73,12 @@ namespace Banco_Devprosoft.Data.Migrations
                 name: "Sueldo",
                 table: "AspNetUsers",
                 type: "int",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Telefono",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<bool>(
@@ -121,10 +151,14 @@ namespace Banco_Devprosoft.Data.Migrations
                     Cedula = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contacto_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contacto_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Empleado = table.Column<bool>(type: "bit", nullable: false),
                     Empresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salario = table.Column<int>(type: "int", nullable: false),
+                    Salario = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ocupacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cerrada = table.Column<bool>(type: "bit", nullable: false),
+                    Tipo_Cuenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fecha_Cierre = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Fecha_Solicitud = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -149,31 +183,20 @@ namespace Banco_Devprosoft.Data.Migrations
                     Cedula = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contacto_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contacto_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Empleado = table.Column<bool>(type: "bit", nullable: false),
                     Empresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salario = table.Column<int>(type: "int", nullable: false),
+                    Salario = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ocupacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cerrada = table.Column<bool>(type: "bit", nullable: false),
+                    Tipo_Cuenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fecha_Cierre = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Fecha_Solicitud = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Solicitudes_Prestamos", x => x.Solicitud_ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Transferencias",
-                columns: table => new
-                {
-                    Transferencia_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Cuenta_Origen_ID = table.Column<int>(type: "int", nullable: false),
-                    Cuenta_Destino_ID = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Transaccion = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transferencias", x => x.Transferencia_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +223,28 @@ namespace Banco_Devprosoft.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Transferencias",
+                columns: table => new
+                {
+                    Transferencia_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cuenta_Origen_ID = table.Column<int>(type: "int", nullable: false),
+                    Cuenta_Destino_ID = table.Column<int>(type: "int", nullable: false),
+                    Fecha_Transaccion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Monto = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transferencias", x => x.Transferencia_ID);
+                    table.ForeignKey(
+                        name: "FK_Transferencias_Cuentas_Bancarias_Cuenta_Origen_ID",
+                        column: x => x.Cuenta_Origen_ID,
+                        principalTable: "Cuentas_Bancarias",
+                        principalColumn: "Cuenta_ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pagos",
                 columns: table => new
                 {
@@ -207,27 +252,22 @@ namespace Banco_Devprosoft.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Servicio_Pagado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cuenta_Origen_ID = table.Column<int>(type: "int", nullable: false),
+                    Cuenta_Destino_ID = table.Column<int>(type: "int", nullable: false),
                     Monto_Parcial = table.Column<int>(type: "int", nullable: false),
                     Mora = table.Column<int>(type: "int", nullable: false),
                     Monto_Total = table.Column<int>(type: "int", nullable: false),
                     Fecha_Pago = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Servicio_ID = table.Column<int>(type: "int", nullable: false)
+                    Prestamo_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pagos", x => x.Pago_ID);
                     table.ForeignKey(
-                        name: "FK_Pagos_Prestamos_Servicio_ID",
-                        column: x => x.Servicio_ID,
+                        name: "FK_Pagos_Prestamos_Prestamo_ID",
+                        column: x => x.Prestamo_ID,
                         principalTable: "Prestamos",
                         principalColumn: "Prestamo_ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pagos_Tarjetas_Servicio_ID",
-                        column: x => x.Servicio_ID,
-                        principalTable: "Tarjetas",
-                        principalColumn: "Tarjeta_ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -236,14 +276,19 @@ namespace Banco_Devprosoft.Data.Migrations
                 column: "Propietario_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagos_Servicio_ID",
+                name: "IX_Pagos_Prestamo_ID",
                 table: "Pagos",
-                column: "Servicio_ID");
+                column: "Prestamo_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarjetas_Cuenta_ID",
                 table: "Tarjetas",
                 column: "Cuenta_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transferencias_Cuenta_Origen_ID",
+                table: "Transferencias",
+                column: "Cuenta_Origen_ID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -258,19 +303,31 @@ namespace Banco_Devprosoft.Data.Migrations
                 name: "Solicitudes_Prestamos");
 
             migrationBuilder.DropTable(
+                name: "Tarjetas");
+
+            migrationBuilder.DropTable(
                 name: "Transferencias");
 
             migrationBuilder.DropTable(
                 name: "Prestamos");
 
             migrationBuilder.DropTable(
-                name: "Tarjetas");
-
-            migrationBuilder.DropTable(
                 name: "Cuentas_Bancarias");
 
             migrationBuilder.DropColumn(
+                name: "Apellidos",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
                 name: "Cedula",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Contacto_1",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Contacto_2",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
@@ -290,11 +347,19 @@ namespace Banco_Devprosoft.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
+                name: "Nombres",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
                 name: "Ocupacion",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
                 name: "Sueldo",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Telefono",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

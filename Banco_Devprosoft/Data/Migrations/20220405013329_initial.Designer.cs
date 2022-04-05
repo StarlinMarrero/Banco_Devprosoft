@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Banco_Devprosoft.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210331030409_Cuenta_Destino_ID")]
-    partial class Cuenta_Destino_ID
+    [Migration("20220405013329_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -295,8 +295,11 @@ namespace Banco_Devprosoft.Data.Migrations
                     b.Property<string>("Ocupacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Salario")
-                        .HasColumnType("int");
+                    b.Property<string>("Salario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo_Cuenta")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo_De_Cuenta")
                         .HasColumnType("nvarchar(max)");
@@ -367,8 +370,11 @@ namespace Banco_Devprosoft.Data.Migrations
                     b.Property<int>("Plazo_Solicitado")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Salario")
-                        .HasColumnType("int");
+                    b.Property<string>("Salario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo_Cuenta")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Usuario_Registrado")
                         .HasColumnType("bit");
