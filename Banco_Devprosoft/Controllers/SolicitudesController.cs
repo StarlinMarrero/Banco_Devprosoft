@@ -42,17 +42,13 @@ namespace Banco_Devprosoft.Controllers
 
             }
             //var salario_string = Convert.ToString(model.Salario);
-            var salario_mark = "";
-            if (model.Salario != null)
-            {
-                salario_mark = model.Salario.Replace(",", "");
-            };
-
+            var salario_mark = model.Salario.Replace(",", "");
+            var salario_int = Int32.Parse(salario_mark);
             var Solicitud = new Solicitud_Cuenta
             {
                 Nombres = model.Nombres,
                 Apellidos = model.Apellidos,
-                Salario = salario_mark,
+                Salario = salario_int.ToString(),
                 Cedula = model.Cedula,
                 Contacto_1 = model.Contacto_1,
                 Contacto_2 = model.Contacto_2,
